@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Finder</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lbl_mail">E-mail</string>
+    <string name="lbl_username">Kullanıcı Adı</string>
+    <string name="lbl_password">Şifre</string>
+    <string name="lbl_confirm_password">Şifrenizi tekrar giriniz</string>
+    <string name="lbl_forgot_password">Şifremi Unuttum</string>
+    <string name="lbl_remember_me">Beni Hatırla!</string>
+    <string name="lbl_login">Giriş</string>
+    <string name="lbl_or">Ya da</string>
+    <string name="lbl_register">Kayıt Ol!</string>
+    <string name="lbl_do_log">Giriş Yap</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorites">Favoriler</string>
+    <string name="title_profile">Profil</string>
+    <string name="lbl_reservationType">Rezervasyon Tipi Seçin</string>
+    <string name="lbl_hotel">Otel</string>
+    <string name="lbl_tour">Tur</string>
+    <string name="lbl_flight">Uçuş</string>
+</resources>
