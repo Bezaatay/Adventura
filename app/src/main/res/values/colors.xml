@@ -8,6 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#80FFFFFF</color>
+    <color name="edit_text_background">#F6F6F6</color>
     <color name="start_color">#D533E1</color>
     <color name="end_color">#6D9EAA</color>
+    <color name="page_background">#EFEFEF</color>
+    <color name="dark_grey">#575757</color>
+    <color name="light_grey">#AFAFAF</color>
+    <color name="more_light_grey">#B5B5B5</color>
 </resources>

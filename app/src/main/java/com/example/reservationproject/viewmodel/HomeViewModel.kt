@@ -19,8 +19,6 @@ class HomeViewModel : ViewModel() {
     val retrofit = ApiClient
     val Fservice = retrofit.buildService(ServiceInterface::class.java)
 
-    val paramLiveData = MutableLiveData<String>()
-
     fun getAllHotels() {
         Fservice.getAllHotels().enqueue(object : Callback<List<HotelElement>> {
             override fun onResponse(call: Call<List<HotelElement>>, response: Response<List<HotelElement>>) {

@@ -50,7 +50,10 @@ data class FlightElement(
     val baggage: Long,
     val cabinBaggage: Long,
     val flightTypeID: Long,
-    val flightTypeName: String
+    val flightTypeName: String,
+    val image: String?,
+    val fromWhere : String?,
+    val toWhere : String?
 )
 
 data class Currency(

@@ -1,4 +1,4 @@
-package com.example.reservationproject.view
+package com.example.reservationproject.viewmodel
 
 import androidx.lifecycle.ViewModel
 

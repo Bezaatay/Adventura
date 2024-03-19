@@ -3,20 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.reservationproject.view.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_navigation_home_to_productFragment"
-            app:destination="@id/productFragment" />
-        <action
-            android:id="@+id/action_navigation_home_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -35,8 +28,18 @@
         android:label="profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/productFragment"
-        android:name="com.example.reservationproject.view.ProductFragment"
-        android:label="fragment_product"
-        tools:layout="@layout/fragment_product" />
+        android:id="@+id/resFlight"
+        android:name="com.example.reservationproject.view.ResFlight"
+        android:label="fragment_res_flight"
+        tools:layout="@layout/fragment_res_flight" />
+    <fragment
+        android:id="@+id/resTour"
+        android:name="com.example.reservationproject.view.ResTour"
+        android:label="fragment_res_tour"
+        tools:layout="@layout/fragment_res_tour" />
+    <fragment
+        android:id="@+id/resHotel"
+        android:name="com.example.reservationproject.view.ResHotel"
+        android:label="fragment_res_hotel"
+        tools:layout="@layout/fragment_res_hotel" />
 </navigation>
