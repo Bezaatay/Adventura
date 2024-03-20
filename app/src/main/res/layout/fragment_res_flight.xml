@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
             android:layout_width="match_parent"
@@ -26,7 +27,8 @@
             <TextView
                 android:id="@+id/SearchFlightBtn"
                 android:layout_width="368dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:gravity="center"
                 android:text="@string/search_flight"
                 android:textColor="@color/white"
@@ -42,7 +44,7 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="220dp"
+                android:layout_marginEnd="200dp"
                 android:padding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +54,7 @@
                     android:id="@+id/imageView4"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
                     android:src="@drawable/calendar"
                     app:layout_constraintBottom_toBottomOf="@+id/textView6"
@@ -108,6 +110,7 @@
                 android:ems="10"
                 android:hint="@string/select_city"
                 android:inputType="text"
+                android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView8"
@@ -139,6 +142,7 @@
                 android:hint="@string/select_city"
                 android:inputType="text"
                 android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView9"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -186,7 +190,7 @@
                 android:id="@+id/radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="203dp"
+                android:layout_marginStart="180dp"
                 android:layout_marginEnd="7dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -224,7 +228,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginEnd="6dp"
                     android:src="@drawable/users"
@@ -240,8 +244,8 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginEnd="72dp"
                     android:text="@string/traveller"
-                    android:textSize="18sp"
                     android:textColor="@color/white"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView5"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -255,8 +259,8 @@
                     android:ems="10"
                     android:inputType="number"
                     android:text="@string/_1"
-                    android:textSize="14sp"
                     android:textColor="@color/white"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/childMinus"
                     app:layout_constraintStart_toEndOf="@+id/childMinus"
                     app:layout_constraintTop_toTopOf="@+id/childMinus"
@@ -271,8 +275,8 @@
                     android:ems="10"
                     android:inputType="number"
                     android:text="@string/_1"
-                    android:textSize="14sp"
                     android:textColor="@color/white"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/babyMinus"
                     app:layout_constraintStart_toEndOf="@+id/babyMinus"
                     app:layout_constraintTop_toTopOf="@+id/babyMinus"
@@ -283,6 +287,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="1dp"
                     android:text="@string/child"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -295,8 +300,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/baby"
-                    android:textSize="15sp"
                     android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -304,7 +310,7 @@
                     android:id="@+id/childAdd"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="33dp"
                     android:src="@drawable/add"
                     app:layout_constraintBottom_toBottomOf="@+id/childMinus"
                     app:layout_constraintStart_toEndOf="@+id/childMinus"
@@ -314,7 +320,7 @@
                     android:id="@+id/babyAdd"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="33dp"
                     android:src="@drawable/add"
                     app:layout_constraintBottom_toBottomOf="@+id/babyMinus"
                     app:layout_constraintStart_toEndOf="@+id/babyMinus"
@@ -326,7 +332,7 @@
                     android:layout_height="15dp"
                     android:layout_marginStart="82dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/minus_sign"
+                    android:src="@drawable/minus"
                     app:layout_constraintBottom_toBottomOf="@+id/textView12"
                     app:layout_constraintStart_toEndOf="@+id/textView12"
                     app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -337,8 +343,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:hint="@string/child_age"
-                    android:textSize="12sp"
                     android:textColorHint="@color/white"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView12"
                     app:layout_constraintStart_toEndOf="@+id/textView12"
                     app:layout_constraintTop_toTopOf="@+id/textView12"
@@ -350,9 +356,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:hint="@string/baby_age"
-                    android:textSize="12sp"
-                    android:textColorHint="@color/white"
                     android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView13"
                     app:layout_constraintStart_toEndOf="@+id/textView13"
                     app:layout_constraintTop_toTopOf="@+id/textView13"
@@ -363,8 +369,8 @@
                     android:id="@+id/babyMinus"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_marginStart="83dp"
-                    android:src="@drawable/minus_sign"
+                    android:layout_marginStart="82dp"
+                    android:src="@drawable/minus"
                     app:layout_constraintBottom_toBottomOf="@+id/textView13"
                     app:layout_constraintStart_toEndOf="@+id/textView13"
                     app:layout_constraintTop_toTopOf="@+id/textView13" />
@@ -375,8 +381,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/adult"
-                    android:textSize="15sp"
                     android:textColor="@color/white"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
@@ -389,8 +395,8 @@
                     android:ems="10"
                     android:inputType="number"
                     android:text="@string/_1"
-                    android:textSize="14sp"
                     android:textColor="@color/white"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/adultMinus"
                     app:layout_constraintStart_toEndOf="@+id/adultMinus"
                     app:layout_constraintTop_toTopOf="@+id/adultMinus"
@@ -401,7 +407,7 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginStart="72dp"
-                    android:src="@drawable/minus_sign"
+                    android:src="@drawable/minus"
                     app:layout_constraintBottom_toBottomOf="@+id/textView11"
                     app:layout_constraintStart_toEndOf="@+id/textView11"
                     app:layout_constraintTop_toTopOf="@+id/textView11" />
@@ -416,6 +422,26 @@
                     app:layout_constraintStart_toEndOf="@+id/adultMinus"
                     app:layout_constraintTop_toTopOf="@+id/adultMinus" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="350dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/SearchFlightBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <View
+                android:layout_width="250dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.322"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fromWhereEdttx" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

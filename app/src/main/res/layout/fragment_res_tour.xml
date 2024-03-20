@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
-            android:layout_height="310dp"
+            android:layout_height="300dp"
             android:background="@drawable/bottom_radius_background"
             android:paddingLeft="6dp"
             android:paddingTop="6dp"
@@ -23,6 +23,16 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="350dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/SearchTourBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView6"
@@ -119,7 +129,8 @@
             <TextView
                 android:id="@+id/SearchTourBtn"
                 android:layout_width="390dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
                 android:gravity="center"
                 android:text="@string/search_tour"
                 android:textColor="@color/white"

@@ -102,7 +102,7 @@ class ResFlight : Fragment(), FlightItemAdapter.OnItemClickListener {
             val childSeat = binding.childNumEdttx.text
             val babySeat = binding.babyNumEdttx.text
             val flightType = viewModel.selectedFlightType.value
-            Log.e("AA", "$fromWhere,$toWhere,$departureTime,$babySeat,$flightType")
+            Log.e("flight info", "$fromWhere,$toWhere,$departureTime,$babySeat,$flightType")
         }
 
         adultAdd.setOnClickListener {

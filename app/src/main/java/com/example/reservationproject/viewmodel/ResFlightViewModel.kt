@@ -46,9 +46,10 @@ class ResFlightViewModel : ViewModel() {
     fun setSelectedFlightType(flightType: String) {
         _selectedFlightType.value = flightType
     }
+
     fun swapTexts(text: Editable, text1: Editable) {
-        val fromWhereText : String = text.toString()
-        val toWhereText : String = text1.toString()
+        val fromWhereText: String = text.toString()
+        val toWhereText: String = text1.toString()
 
         _fromWhereText.value = toWhereText
         _toWhereText.value = fromWhereText
@@ -59,11 +60,13 @@ class ResFlightViewModel : ViewModel() {
         _childNumber.value = 1
         _babyNumber.value = 1
     }
+
     private fun formatDate(calendar: Calendar): String {
         val dateFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
         return sdf.format(calendar.time)
     }
+
     fun setTravelDate(year: Int, month: Int, dayOfMonth: Int) {
         val calendar = Calendar.getInstance().apply {
             set(Calendar.YEAR, year)
@@ -117,4 +120,4 @@ class ResFlightViewModel : ViewModel() {
 
         })
     }
-    }
+}

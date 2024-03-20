@@ -33,13 +33,6 @@ class ResHotel : Fragment(), HotelItemAdapter.OnItemClickListener {
     ): View {
         binding = FragmentResHotelBinding.inflate(inflater, container, false)
 
-        Log.e("dsf", "$arguments?.getString(\"param\")")
-        when (arguments?.getString("param")) {
-            "flight" -> viewModel.getAirline()
-            "hotel" -> viewModel.getAllHotels()
-            "tour" -> viewModel.getAllTours()
-            else -> Log.e("hatalı param", "$arguments?.getString(\"param\"")
-        }
         hotelItem = ArrayList()
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
 

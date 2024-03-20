@@ -25,7 +25,6 @@ class HomeViewModel : ViewModel() {
                 Log.e("beyza","asama1")
                 val responseBody = response.body()
                 if(responseBody != null) {
-                    Log.e("beyza", "asama2")
                     Log.e("beyza", responseBody.toString())
                 }
                 else {
@@ -36,8 +35,6 @@ class HomeViewModel : ViewModel() {
             override fun onFailure(call: Call<List<HotelElement>>, t: Throwable) {
 
                 Log.e("beyzaHata",t.message.toString())
-                Log.e("beyzaHata",t.cause.toString())
-                Log.e("beyzaHata",t.toString())
             }
         })
     }
@@ -59,6 +56,5 @@ class HomeViewModel : ViewModel() {
                 Log.e("beyzaHata",t.cause.toString())
             }
         })
-        Log.e("beyzaHata","sdsfs")
     }
 }
