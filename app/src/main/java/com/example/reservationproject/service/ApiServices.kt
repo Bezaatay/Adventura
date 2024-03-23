@@ -12,7 +12,10 @@ object ApiClient {
     private const val BASE_URL = "https://www.finalproject.com.tr/"
 
     // OkHttpClient'ı oluştur ve interceptor'ı ekle
-    private val client = OkHttpClient.Builder().build()
+    private val client = OkHttpClient.Builder()
+        .readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
+        .build()
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
