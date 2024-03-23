@@ -59,4 +59,6 @@
     <string name="featured_tours">Öne Çıkan Turlar</string>
     <string name="search_tour">Tur Ara</string>
     <string name="traveller_num">Yolcu Sayısı</string>
+    <string name="popular_flights">Popüler Uçuşlar</string>
+    <string name="tour_type">TourType</string>
 </resources>

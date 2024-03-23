@@ -2,32 +2,49 @@ package com.example.reservationproject.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reservationproject.R
+import com.example.reservationproject.adapter.FlightItemAdapter
+import com.example.reservationproject.adapter.TourItemAdapter
+import com.example.reservationproject.databinding.FragmentResTourBinding
+import com.example.reservationproject.model.FlightElement
+import com.example.reservationproject.model.TourElement
+import com.example.reservationproject.viewmodel.ResFlightViewModel
 import com.example.reservationproject.viewmodel.ResTourViewModel
 
-class ResTour : Fragment() {
-
-    companion object {
-        fun newInstance() = ResTour()
-    }
-
-    private lateinit var viewModel: ResTourViewModel
+class ResTour : Fragment(), TourItemAdapter.OnItemClickListener {
+    private lateinit var binding: FragmentResTourBinding
+    private val viewModel: ResTourViewModel by viewModels()
+    private var tourItem = mutableListOf<TourElement>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_res_tour, container, false)
+    ): View {
+        binding = FragmentResTourBinding.inflate(inflater, container, false)
+
+        tourItem = ArrayList()
+        binding.rv.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.getFeaturedTours()
+
+        viewModel.tours.observe(viewLifecycleOwner) {
+            it?.let {
+                val adapter = TourItemAdapter(requireContext(), it, this)
+                binding.rv.adapter = adapter
+            }
+        }
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ResTourViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onItemClick(position: Int) {
+        Log.e("on item clicked", position.toString())
     }
 
 }

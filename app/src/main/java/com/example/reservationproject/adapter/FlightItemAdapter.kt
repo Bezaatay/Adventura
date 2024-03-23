@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -51,10 +50,10 @@ class FlightItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        Glide.with(context).load(item[position].image).into(holder.airlinePhoto)
+       // Glide.with(context).load(item[position].image).into(holder.airlinePhoto)
         holder.airlineNameTxt.text = item[position].airlineName
-        holder.fromWhereTxt.text = item[position].fromWhere
-        holder.toWhereTxt.text = item[position].toWhere
+        holder.fromWhereTxt.text = item[position].departureCity
+        holder.toWhereTxt.text = item[position].landingCity
         holder.priceTxt.text = item[position].adultSeatPrice.toString()
     }
 

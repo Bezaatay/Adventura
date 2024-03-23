@@ -1,6 +1,5 @@
 package com.example.reservationproject.view
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.reservationproject.adapter.FlightItemAdapter
 import com.example.reservationproject.adapter.HotelItemAdapter
 import com.example.reservationproject.databinding.FragmentResHotelBinding
 import com.example.reservationproject.model.HotelElement
@@ -35,6 +32,8 @@ class ResHotel : Fragment(), HotelItemAdapter.OnItemClickListener {
 
         hotelItem = ArrayList()
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.getFeaturedHotels()
 
         viewModel.hotels.observe(viewLifecycleOwner) {
             it?.let {

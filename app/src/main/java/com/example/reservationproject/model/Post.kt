@@ -1,6 +1,6 @@
 package com.example.reservationproject.model
 
-data class HotelElement(
+data class HotelElement (
     val id: Long,
     val name: String,
     val description: String,
@@ -19,7 +19,7 @@ data class HotelElement(
     val image: String
 )
 
-data class TourElement(
+data class TourElement (
     val id: Long,
     val name: String,
     val currencyID: Long,
@@ -32,10 +32,11 @@ data class TourElement(
     val policy: String,
     val location: String,
     val tourTypeID: Long,
-    val tourTypeName: String
+    val tourTypeName: String,
+    val image: String
 )
 
-data class FlightElement(
+data class FlightElement (
     val id: Long,
     val airlineID: Long,
     val airlineName: String,
@@ -51,17 +52,6 @@ data class FlightElement(
     val cabinBaggage: Long,
     val flightTypeID: Long,
     val flightTypeName: String,
-    val image: String?,
-    val fromWhere : String?,
-    val toWhere : String?
-)
-
-data class Currency(
-    val id: Long,
-    val name: String
-)
-
-data class AirlineList(
-    val id: Long,
-    val name: String
+    val departureCity: String,
+    val landingCity: String
 )
