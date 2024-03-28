@@ -1,4 +1,4 @@
-package com.example.afinal.view
+package com.example.reservationproject.view
 
 import android.os.Bundle
 import android.text.InputType

@@ -21,11 +21,11 @@
                 android:id="@+id/airlineNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="297dp"
+                android:layout_marginBottom="9dp"
                 android:text="@string/airline_name"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/fromWhereTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,30 +34,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
-                android:layout_marginEnd="325dp"
-                android:layout_marginBottom="16dp"
                 android:text="@string/prize"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/currencyTxt" />
+                app:layout_constraintBottom_toBottomOf="@+id/currencyTxt"
+                app:layout_constraintStart_toEndOf="@+id/currencyTxt"
+                app:layout_constraintTop_toTopOf="@+id/currencyTxt" />
 
             <TextView
                 android:id="@+id/currencyTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="3dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/currency_type"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/priceTxt"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fromWhereTxt" />
 
             <TextView
                 android:id="@+id/fromWhereTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="7dp"
                 android:text="@string/from_where"
@@ -70,29 +70,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginEnd="233dp"
                 android:text="@string/to_where"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView11"
                 app:layout_constraintStart_toEndOf="@+id/imageView11"
-                app:layout_constraintTop_toBottomOf="@+id/airlineNameTxt" />
+                app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
             <ImageView
                 android:id="@+id/imageView11"
                 android:layout_width="30dp"
                 android:layout_height="15dp"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="13dp"
                 android:layout_marginEnd="7dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fromWhereTxt"
                 app:layout_constraintEnd_toStartOf="@+id/toWhereTxt"
                 app:layout_constraintStart_toEndOf="@+id/fromWhereTxt"
-                app:layout_constraintTop_toBottomOf="@+id/airlineNameTxt"
+                app:layout_constraintTop_toTopOf="@+id/fromWhereTxt"
                 app:srcCompat="@drawable/right_arrow" />
 
             <ImageView
                 android:id="@+id/airlinePhoto"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="74dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"

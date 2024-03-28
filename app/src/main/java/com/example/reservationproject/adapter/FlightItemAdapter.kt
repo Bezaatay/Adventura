@@ -50,7 +50,7 @@ class FlightItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-       // Glide.with(context).load(item[position].image).into(holder.airlinePhoto)
+        Glide.with(context).load(item[position].airlineImage).into(holder.airlinePhoto)
         holder.airlineNameTxt.text = item[position].airlineName
         holder.fromWhereTxt.text = item[position].departureCity
         holder.toWhereTxt.text = item[position].landingCity
