@@ -25,6 +25,7 @@ class FlightItemAdapter(
         val fromWhereTxt: TextView = itemView.findViewById(R.id.fromWhereTxt)
         val toWhereTxt: TextView = itemView.findViewById(R.id.toWhereTxt)
         val priceTxt: TextView = itemView.findViewById(R.id.priceTxt)
+        val flightId : TextView =  itemView.findViewById(R.id.flightId)
 
         init {
             itemView.setOnClickListener(this)
@@ -55,6 +56,7 @@ class FlightItemAdapter(
         holder.fromWhereTxt.text = item[position].departureCity
         holder.toWhereTxt.text = item[position].landingCity
         holder.priceTxt.text = item[position].adultSeatPrice.toString()
+        holder.flightId.text = item[position].id.toString()
     }
 
     override fun getItemCount(): Int {

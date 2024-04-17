@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <EditText
         android:id="@+id/mailTxt"
         android:layout_width="340dp"
@@ -25,8 +24,9 @@
         android:layout_marginTop="48dp"
         android:background="@drawable/rounded_corner"
         android:ems="10"
-        android:hint="@string/lbl_mail"
+        android:hint="@string/lbl_username"
         android:inputType="text"
+        android:textColor="@color/white"
         android:padding="18dp"
         android:textColorHint="@color/white"
         android:textSize="20sp"
@@ -43,6 +43,7 @@
         android:background="@drawable/rounded_corner"
         android:ems="10"
         android:hint="@string/lbl_password"
+        android:textColor="@color/white"
         android:inputType="textPassword"
         android:padding="18dp"
         android:textColorHint="@color/white"
@@ -110,7 +111,7 @@
         android:layout_marginTop="17dp"
         android:layout_marginEnd="41dp"
         android:text="@string/lbl_forgot_password"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toBottomOf="@+id/PasswTxt" />
@@ -123,6 +124,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="13dp"
         android:text="@string/lbl_remember_me"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/login_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PasswTxt" />

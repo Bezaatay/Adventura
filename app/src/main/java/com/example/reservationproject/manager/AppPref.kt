@@ -1,4 +1,4 @@
-package com.works.solutionchallange2024.manager
+package com.example.reservationproject.manager
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -8,6 +8,7 @@ class AppPref(context: Context) {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("Login", Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
 
     companion object {
         private const val mail_KEY = "mail"
@@ -22,11 +23,9 @@ class AppPref(context: Context) {
             apply()
         }
     }
-
-
-    fun userData(mail: String?, password: String, isChecked: Boolean) {
+    fun userData(username: String?, password: String, isChecked: Boolean) {
         editor.apply {
-            putString(mail_KEY, mail)
+            putString(mail_KEY, username)
             putString(password_KEY, password)
             putBoolean(isChecked_KEY, isChecked)
             apply()

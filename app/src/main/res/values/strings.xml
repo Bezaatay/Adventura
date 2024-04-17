@@ -49,7 +49,7 @@
     <string name="baby_age">(0-2 Yaş)</string>
     <string name="populer_flights">Popüler Uçuşlar</string>
     <string name="featured_flights">Öne Çıkan Uçuşlar</string>
-    <string name="welcome_back">Welcome Back</string>
+    <string name="welcome_back">Hoşgeldiniz!</string>
     <string name="username">Kullanıcı Adı</string>
     <string name="discover">Yeni Yerler Keşfet! Biletini al ve Yolculuğa başla!</string>
     <string name="popular_tours">Popüler Turlar</string>
@@ -61,4 +61,7 @@
     <string name="traveller_num">Yolcu Sayısı</string>
     <string name="popular_flights">Popüler Uçuşlar</string>
     <string name="tour_type">TourType</string>
+    <string name="name">Ad</string>
+    <string name="surname">Soyad</string>
+    <string name="log_in_as_a_member">ÜYE GİRİŞİ YAPIN</string>
 </resources>

@@ -13,6 +13,7 @@ import com.example.reservationproject.adapter.FlightItemAdapter
 import com.example.reservationproject.adapter.HotelItemAdapter
 import com.example.reservationproject.adapter.TourItemAdapter
 import com.example.reservationproject.databinding.FragmentHomeBinding
+import com.example.reservationproject.manager.AppPref
 import com.example.reservationproject.model.FlightElement
 import com.example.reservationproject.model.HotelElement
 import com.example.reservationproject.model.TourElement

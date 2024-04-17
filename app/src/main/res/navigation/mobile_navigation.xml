@@ -31,15 +31,32 @@
         android:id="@+id/resFlight"
         android:name="com.example.reservationproject.view.ResFlight"
         android:label="fragment_res_flight"
-        tools:layout="@layout/fragment_res_flight" />
+        tools:layout="@layout/fragment_res_flight" >
+        <action
+            android:id="@+id/action_resFlight_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/resTour"
         android:name="com.example.reservationproject.view.ResTour"
         android:label="fragment_res_tour"
-        tools:layout="@layout/fragment_res_tour" />
+        tools:layout="@layout/fragment_res_tour" >
+        <action
+            android:id="@+id/action_resTour_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/resHotel"
         android:name="com.example.reservationproject.view.ResHotel"
         android:label="fragment_res_hotel"
-        tools:layout="@layout/fragment_res_hotel" />
+        tools:layout="@layout/fragment_res_hotel" >
+        <action
+            android:id="@+id/action_resHotel_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="com.example.reservationproject.view.ItemFragment"
+        android:label="fragment_item"
+        tools:layout="@layout/fragment_item" />
 </navigation>
