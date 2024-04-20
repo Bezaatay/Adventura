@@ -1,4 +1,4 @@
-package com.example.reservationproject.repo
+package com.example.bezalibrary.service.repo
 
 import com.example.reservationproject.model.NewUser
 import com.example.reservationproject.model.RegisterResponse

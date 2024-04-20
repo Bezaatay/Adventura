@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.R
 import com.example.reservationproject.databinding.FragmentRegisterBinding
 import com.example.reservationproject.manager.AppPref
@@ -42,7 +43,7 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         val appPref = AppPref(requireContext())
-
+        val functions = Functions()
         viewModel.passwordVisible.observe(viewLifecycleOwner) { isVisible ->
             if (isVisible) {
                 // Şifre görünürse
@@ -118,7 +119,7 @@ class RegisterFragment : Fragment() {
                         binding.nameTxt.text.toString(),
                         binding.surnameTxt.text.toString()
                     )
-                    viewModel.createUser(user)
+                   // functions.createUser(user)
 
                     val transition = RegisterFragmentDirections.regToLog(
                         username = binding.usernameTxt.text.toString(),

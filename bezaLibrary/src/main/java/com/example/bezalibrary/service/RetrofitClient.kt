@@ -1,5 +1,6 @@
-package com.example.reservationproject.service
+package com.example.bezalibrary.service
 
+import android.util.Log
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -40,5 +41,9 @@ object RetrofitClient {
                 .build()
         }
         return retrofit as Retrofit
+    }
+    fun printBaseUrl()
+    {
+        Log.e("urll", this.getClient().baseUrl().toString())
     }
 }

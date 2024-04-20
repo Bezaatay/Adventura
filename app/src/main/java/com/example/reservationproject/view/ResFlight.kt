@@ -10,6 +10,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.R
 import com.example.reservationproject.adapter.FlightItemAdapter
 import com.example.reservationproject.databinding.FragmentResFlightBinding
@@ -39,11 +40,13 @@ class ResFlight : Fragment(), FlightItemAdapter.OnItemClickListener {
         val childMinus = binding.childMinus
         val babyMinus = binding.babyMinus
 
+        val functions = Functions()
+
         flightItem = ArrayList()
         binding.rv2.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.getAllFlights()
+        functions.getFeaturedFlights()
 
-        viewModel.flights.observe(viewLifecycleOwner) {
+        viewModel.featuredFlights.observe(viewLifecycleOwner) {
             it?.let {
                 val adapter = FlightItemAdapter(requireContext(), it, this)
                 binding.rv2.adapter = adapter

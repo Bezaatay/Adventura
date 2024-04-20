@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.adapter.HotelItemAdapter
 import com.example.reservationproject.databinding.FragmentResHotelBinding
 import com.example.reservationproject.model.HotelElement
@@ -32,10 +33,12 @@ class ResHotel : Fragment(), HotelItemAdapter.OnItemClickListener {
 
         hotelItem = ArrayList()
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
+        val functions = Functions()
 
-        viewModel.getFeaturedHotels()
+        functions.getFeaturedHotels()
 
-        viewModel.hotels.observe(viewLifecycleOwner) {
+
+        viewModel.featuredHotels.observe(viewLifecycleOwner) {
             it?.let {
                 val adapter = HotelItemAdapter(requireContext(), it, this)
                 binding.rv.adapter = adapter

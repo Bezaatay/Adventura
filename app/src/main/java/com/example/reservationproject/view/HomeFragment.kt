@@ -1,6 +1,5 @@
 package com.example.reservationproject.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.adapter.FlightItemAdapter
 import com.example.reservationproject.adapter.HotelItemAdapter
 import com.example.reservationproject.adapter.TourItemAdapter
 import com.example.reservationproject.databinding.FragmentHomeBinding
-import com.example.reservationproject.manager.AppPref
 import com.example.reservationproject.model.FlightElement
 import com.example.reservationproject.model.HotelElement
 import com.example.reservationproject.model.TourElement
@@ -37,7 +36,7 @@ class HomeFragment : Fragment(), HotelItemAdapter.OnItemClickListener,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
+        val functions = Functions()
         hotelItem = ArrayList()
         tourItem = ArrayList()
         flightItem = ArrayList()
@@ -50,9 +49,9 @@ class HomeFragment : Fragment(), HotelItemAdapter.OnItemClickListener,
         binding.popFlightRV.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        viewModel.getFeaturedFlights()
-        viewModel.getFeaturedHotels()
-        viewModel.getFeaturedTours()
+        functions.getFeaturedFlights()
+        functions.getFeaturedHotels()
+        functions.getFeaturedTours()
 
         viewModel.featuredHotels.observe(viewLifecycleOwner) {
             it.let {

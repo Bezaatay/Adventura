@@ -1,4 +1,4 @@
-package com.example.reservationproject.service
+package com.example.bezalibrary.service
 
 import okhttp3.OkHttpClient
 import okhttp3.Interceptor

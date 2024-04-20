@@ -1,6 +1,5 @@
 package com.example.reservationproject.view
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -12,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.viewmodel.LoginViewModel
 import com.example.reservationproject.R
 import com.example.reservationproject.databinding.FragmentLoginBinding
@@ -27,9 +27,9 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        val functions = Functions()
 
         val appPref = AppPref(requireContext())
-
         val spChecked = appPref.getIsChecked()
 
         if (spChecked) {
@@ -74,10 +74,11 @@ class LoginFragment : Fragment() {
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
             rememberMe = isChecked
         }
-        viewModel.setLoginListener(object : LoginViewModel.LoginListener {
-            override fun onLoginSuccess(token: String) {
+
+        viewModel.isSuccessLogin.observe(viewLifecycleOwner) {
+            if (it) {
                 if (rememberMe) {
-                    appPref.saveToken(token)
+                    // appPref.saveToken(token)
                     appPref.userData(
                         binding.mailTxt.text.toString(),
                         binding.PasswTxt.text.toString(),
@@ -88,7 +89,7 @@ class LoginFragment : Fragment() {
                     startActivity(intent)
                     requireActivity().finish()
                 } else {
-                    appPref.saveToken(token)
+                    //  appPref.saveToken(token)
                     appPref.clearData()
                     appPref.setIsChecked(false)
                     val intent = Intent(requireContext(), MainActivity::class.java)
@@ -97,11 +98,7 @@ class LoginFragment : Fragment() {
                     requireActivity().finish()
                 }
             }
-
-            override fun onLoginFailure(error: String) {
-                appPref.clearToken()
-            }
-        })
+        }
 
         binding.loginBtn.setOnClickListener {
 
@@ -113,7 +110,14 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, "Şifre Boş Bırakılamaz!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             } else {
-                viewModel.Login(binding.mailTxt.text.toString(), binding.PasswTxt.text.toString())
+                functions.login(
+                    binding.mailTxt.text.toString(),
+                    binding.PasswTxt.text.toString()
+                )
+                viewModel.loginSuccess(
+                    binding.mailTxt.text.toString(),
+                    binding.PasswTxt.text.toString()
+                )
             }
         }
         return binding.root

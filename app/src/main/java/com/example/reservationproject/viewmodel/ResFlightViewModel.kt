@@ -5,21 +5,17 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.model.FlightElement
-import com.example.reservationproject.repo.ServiceInterface
-import com.example.reservationproject.service.ApiClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-
 class ResFlightViewModel : ViewModel() {
-    private val retrofit = ApiClient
-    private val service = retrofit.buildService(ServiceInterface::class.java)
-    private val _flights = MutableLiveData<List<FlightElement>?>()
-    val flights: MutableLiveData<List<FlightElement>?> get() = _flights
+    private val functions = Functions()
+
+    private val _featuredFlights = MutableLiveData<List<FlightElement>>()
+    val featuredFlights: MutableLiveData<List<FlightElement>> get() = _featuredFlights
+
     private val _adultNumber = MutableLiveData<Int>()
     private val _childNumber = MutableLiveData<Int>()
     private val _babyNumber = MutableLiveData<Int>()
@@ -40,6 +36,14 @@ class ResFlightViewModel : ViewModel() {
     val travelDate: MutableLiveData<String> by lazy {
         MutableLiveData<String>().apply {
             value = formatDate(Calendar.getInstance())
+        }
+    }
+    init {
+        fetchFeaturedFlights()
+    }
+    fun fetchFeaturedFlights() {
+        functions.getFeaturedFlights().observeForever { flights ->
+            _featuredFlights.value = flights
         }
     }
 
@@ -98,26 +102,5 @@ class ResFlightViewModel : ViewModel() {
 
     fun decrementBabyNumber() {
         _babyNumber.value = (_babyNumber.value ?: 1).coerceAtLeast(1) - 1
-    }
-
-    fun getAllFlights() {
-        service.getAllFlight().enqueue(object : Callback<List<FlightElement>> {
-            override fun onResponse(
-                call: Call<List<FlightElement>>,
-                response: Response<List<FlightElement>>
-            ) {
-                val responseBody = response.body()
-                if (responseBody != null) {
-                    _flights.value = responseBody
-                } else {
-                    Log.e("flightCheck", "response body is null")
-                }
-            }
-
-            override fun onFailure(call: Call<List<FlightElement>>, t: Throwable) {
-                Log.e("flightCheck", t.message.toString())
-            }
-
-        })
     }
 }

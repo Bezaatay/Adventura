@@ -1,4 +1,4 @@
-package com.example.reservationproject.repo
+package com.example.bezalibrary.service.repo
 
 import com.example.reservationproject.model.FlightElement
 import com.example.reservationproject.model.HotelElement

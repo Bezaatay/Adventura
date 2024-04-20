@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ReservationProject"
 include(":app")
- 
+include(":bezaLibrary")

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.R
 import com.example.reservationproject.adapter.FlightItemAdapter
 import com.example.reservationproject.adapter.TourItemAdapter
@@ -28,18 +29,19 @@ class ResTour : Fragment(), TourItemAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentResTourBinding.inflate(inflater, container, false)
+        val functions = Functions()
 
         tourItem = ArrayList()
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.getFeaturedTours()
 
-        viewModel.tours.observe(viewLifecycleOwner) {
+        functions.getFeaturedTours()
+
+        viewModel.featuredTours.observe(viewLifecycleOwner) {
             it?.let {
                 val adapter = TourItemAdapter(requireContext(), it, this)
                 binding.rv.adapter = adapter
             }
         }
-
         return binding.root
     }
 
