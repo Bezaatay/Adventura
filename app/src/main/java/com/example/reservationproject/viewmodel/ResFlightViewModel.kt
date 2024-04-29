@@ -1,12 +1,11 @@
 package com.example.reservationproject.viewmodel
 
 import android.text.Editable
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bezalibrary.service.Functions
-import com.example.reservationproject.model.FlightElement
+import com.example.bezalibrary.service.model.FlightElement
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale

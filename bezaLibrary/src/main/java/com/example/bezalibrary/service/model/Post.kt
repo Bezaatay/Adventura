@@ -1,4 +1,4 @@
-package com.example.reservationproject.model
+package com.example.bezalibrary.service.model
 
 data class HotelElement(
     val id: Long,
@@ -6,7 +6,7 @@ data class HotelElement(
     val description: String,
     val stars: Long,
     val rating: Long,
-    val location: String,
+    val locationName: String,
     val checkin: String,
     val checkout: String,
     val hotemlAmentities: String,
@@ -55,4 +55,23 @@ data class FlightElement(
     val flightTypeName: String,
     val departureCity: String,
     val landingCity: String
+)
+
+data class BlogElement (
+    val id: Int,
+    val image: String,
+    val title: String,
+    val date: String,
+    val desc: String,
+    val blogCategoryID: Long,
+    val blogCategoryName: String
+)
+data class HotelRoomElement (
+    val hotelRoomID: Long,
+    val roomPrice: Long,
+    val roomNumber: String,
+    val roomType: String,
+    val roomImage: String,
+    val hotelID: Long,
+    val hotelName: String
 )

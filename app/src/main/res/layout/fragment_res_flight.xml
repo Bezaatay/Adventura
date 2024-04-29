@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="700dp"
     android:background="@drawable/searchbar_outline"
-    tools:context=".view.ResFlight">
+    tools:context=".view.flightViews.ResFlight">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

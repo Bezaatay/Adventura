@@ -11,13 +11,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.reservationproject.R
-import com.example.reservationproject.model.HotelElement
-import com.example.reservationproject.model.TourElement
+import com.example.bezalibrary.service.model.TourElement
 
 class TourItemAdapter(
     private val context: Context,
     private var article: List<TourElement>,
-    private var listener: OnItemClickListener
+    private var listener: OnTourItemClickListener
 ) : RecyclerView.Adapter<TourItemAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -35,22 +34,21 @@ class TourItemAdapter(
             itemView.setOnClickListener(this)
         }
 
-        override fun onClick(p0: View?) {
+        override fun onClick(view: View) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
+                val tourId = article[position].id // Item'in ID'sini al
+                listener.onTourItemClick(position, tourId) // ID'yi listener'a gönder
             }
         }
     }
-
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
+    interface OnTourItemClickListener {
+        fun onTourItemClick(position: Int, tourId: Long)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-            : ItemViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.tour_card_view, parent, false)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.tour_card_view, parent, false)
         return ItemViewHolder(view)
     }
 
@@ -67,5 +65,4 @@ class TourItemAdapter(
     override fun getItemCount(): Int {
         return article.size
     }
-
 }

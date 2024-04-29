@@ -1,29 +1,24 @@
-package com.example.reservationproject.view
+package com.example.reservationproject.view.hotelViews
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.adapter.HotelItemAdapter
 import com.example.reservationproject.databinding.FragmentResHotelBinding
-import com.example.reservationproject.model.HotelElement
+import com.example.bezalibrary.service.model.HotelElement
 import com.example.reservationproject.utils.DatePicker
 import com.example.reservationproject.viewmodel.ResHotelViewModel
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
-class ResHotel : Fragment(), HotelItemAdapter.OnItemClickListener {
+class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener {
 
     private lateinit var binding: FragmentResHotelBinding
     private val viewModel: ResHotelViewModel by viewModels()
-
-    private var hotelItemAdapter: HotelItemAdapter? = null
     private var hotelItem = mutableListOf<HotelElement>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +35,7 @@ class ResHotel : Fragment(), HotelItemAdapter.OnItemClickListener {
 
         viewModel.featuredHotels.observe(viewLifecycleOwner) {
             it?.let {
-                val adapter = HotelItemAdapter(requireContext(), it, this)
+                val adapter = HotelItemAdapter(requireContext(), it, this, "HomeFragment")
                 binding.rv.adapter = adapter
             }
         }
@@ -74,7 +69,10 @@ class ResHotel : Fragment(), HotelItemAdapter.OnItemClickListener {
         return binding.root
     }
 
-    override fun onItemClick(position: Int) {
-        Log.e("onitemclicked", position.toString())
+    override fun onHotelItemClick(itemId: Long) {
+        // Tıklanan öğenin ID'sini burada kullanın
+        // Örneğin, bir Toast mesajıyla göstermek için:
+        Toast.makeText(requireContext(), "Tıklanan öğe ID: $itemId", Toast.LENGTH_SHORT).show()
     }
+
 }

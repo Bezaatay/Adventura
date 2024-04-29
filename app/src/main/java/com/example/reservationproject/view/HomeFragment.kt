@@ -7,20 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bezalibrary.service.Functions
+import com.example.reservationproject.R
 import com.example.reservationproject.adapter.FlightItemAdapter
 import com.example.reservationproject.adapter.HotelItemAdapter
 import com.example.reservationproject.adapter.TourItemAdapter
 import com.example.reservationproject.databinding.FragmentHomeBinding
-import com.example.reservationproject.model.FlightElement
-import com.example.reservationproject.model.HotelElement
-import com.example.reservationproject.model.TourElement
+import com.example.bezalibrary.service.model.FlightElement
+import com.example.bezalibrary.service.model.HotelElement
+import com.example.bezalibrary.service.model.TourElement
 import com.example.reservationproject.viewmodel.HomeViewModel
 
 
-class HomeFragment : Fragment(), HotelItemAdapter.OnItemClickListener,
-    TourItemAdapter.OnItemClickListener, FlightItemAdapter.OnItemClickListener {
+class HomeFragment : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
+    TourItemAdapter.OnTourItemClickListener, FlightItemAdapter.OnFlightItemClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -37,9 +39,12 @@ class HomeFragment : Fragment(), HotelItemAdapter.OnItemClickListener,
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val functions = Functions()
+
         hotelItem = ArrayList()
         tourItem = ArrayList()
         flightItem = ArrayList()
+
+
         binding.popHotelRV.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
@@ -55,7 +60,8 @@ class HomeFragment : Fragment(), HotelItemAdapter.OnItemClickListener,
 
         viewModel.featuredHotels.observe(viewLifecycleOwner) {
             it.let {
-                val adapter = it?.let { it1 -> HotelItemAdapter(requireContext(), it1, this) }
+                val adapter =
+                    it?.let { it1 -> HotelItemAdapter(requireContext(), it1, this, "HomeFragment") }
                 binding.popHotelRV.adapter = adapter
             }
         }
@@ -71,11 +77,38 @@ class HomeFragment : Fragment(), HotelItemAdapter.OnItemClickListener,
                 binding.popFlightRV.adapter = adapter
             }
         }
-
+        binding.seeAllHotel.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_seeAllHotelFragment)
+        }
+        binding.seeAllTours.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_seeAllToursFragment)
+        }
+        binding.seeAllFlights.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_seeAllFlightsFragment)
+        }
         return binding.root
     }
 
-    override fun onItemClick(position: Int) {
-        Log.e("on item clicked", position.toString())
+
+    override fun onHotelItemClick(itemId: Long) {
+        findNavController().navigate(R.id.action_navigation_home_to_itemFragment, Bundle().apply {
+            putLong("itemId", itemId)
+        })
     }
+
+    override fun onTourItemClick(position: Int, tourId: Long) {
+        findNavController().navigate(
+            R.id.action_navigation_home_to_tourItemFragment,
+            Bundle().apply {
+                putLong("tourId", tourId)
+            })
+    }
+
+    override fun onFlightItemClick(position: Int, flightId: Long) {
+        findNavController().navigate(R.id.action_navigation_home_to_flightItemFragment,
+            Bundle().apply {
+                putLong("flightId", flightId)
+            })
+    }
+
 }

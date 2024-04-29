@@ -3,7 +3,6 @@ package com.example.reservationproject.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
@@ -11,17 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.reservationproject.R
-import com.example.reservationproject.model.HotelElement
+import com.example.bezalibrary.service.model.HotelElement
 
 class HotelItemAdapter(
     private val context: Context,
     private var article: List<HotelElement>,
-    private var listener: OnItemClickListener
-) : RecyclerView.Adapter<HotelItemAdapter.ItemViewHolder>() {
+    private var listener: OnHotelItemClickListener,
+    private val callingFragment: String
+) : RecyclerView.Adapter<HotelItemAdapter.ItemViewHolder>(), View.OnClickListener {
 
-    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        OnClickListener {
-
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val photoImgView: ImageView = itemView.findViewById(R.id.photoImgView)
         val hotelNameTxt: TextView = itemView.findViewById(R.id.hotelNameTxt)
         val locationTxt: TextView = itemView.findViewById(R.id.locationTxt)
@@ -30,39 +28,50 @@ class HotelItemAdapter(
         val priceTxt: TextView = itemView.findViewById(R.id.priceTxt)
 
         init {
-            itemView.setOnClickListener(this)
+            itemView.setOnClickListener(this@HotelItemAdapter)
         }
 
-        override fun onClick(p0: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
-            }
+        fun bind(hotelElement: HotelElement) {
+            itemView.tag = adapterPosition
+            Glide.with(context).load(hotelElement.image).into(photoImgView)
+            hotelNameTxt.text = hotelElement.name
+            locationTxt.text = hotelElement.locationName
+            currencyTxt.text = hotelElement.currencyName
+            priceTxt.text = hotelElement.price.toString()
+            ratingBar.rating = hotelElement.stars.toFloat()
         }
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
+    interface OnHotelItemClickListener {
+        fun onHotelItemClick(itemId: Long)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-            : ItemViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.hotel_card_view, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        val layout = getLayoutResource(callingFragment)
+        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         return ItemViewHolder(view)
     }
 
+    private fun getLayoutResource(fragmentName: String): Int {
+        return when (fragmentName) {
+            "HomeFragment" -> R.layout.hotel_card_view
+            "SeeAllHotelFragment" -> R.layout.hotel_card_view2
+            else -> throw IllegalArgumentException("Invalid fragment name provided")
+        }
+    }
+
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        Glide.with(context).load(article[position].image).into(holder.photoImgView)
-        holder.hotelNameTxt.text = article[position].name
-        holder.locationTxt.text = article[position].location
-        holder.currencyTxt.text = article[position].currencyName
-        holder.priceTxt.text = article[position].price.toString()
-        holder.ratingBar.rating = article[position].stars.toFloat()
+        val hotelElement = article[position]
+        holder.bind(hotelElement)
     }
 
     override fun getItemCount(): Int {
         return article.size
     }
 
+    override fun onClick(view: View) {
+        val position = view.tag as Int
+        val hotelElement = article[position]
+        hotelElement.id.let { listener.onHotelItemClick(it) }
+    }
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bezalibrary.service.Functions
-import com.example.reservationproject.model.TourElement
+import com.example.bezalibrary.service.model.TourElement
 
 class ResTourViewModel : ViewModel() {
     private val functions = Functions()

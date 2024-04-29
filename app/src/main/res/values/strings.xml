@@ -64,4 +64,7 @@
     <string name="name">Ad</string>
     <string name="surname">Soyad</string>
     <string name="log_in_as_a_member">ÜYE GİRİŞİ YAPIN</string>
+    <string name="choose_hotel_find_room">Beğendiğin oteli seç istediğin odayı rezerve et ve tatile Başla!</string>
+    <string name="description">description</string>
+    <string name="find_place_to_abroad">Gezmek istediğin yeri seç! Biletini al yolculuğa başla!</string>
 </resources>

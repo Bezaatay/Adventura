@@ -9,12 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.reservationproject.R
-import com.example.reservationproject.model.FlightElement
+import com.example.bezalibrary.service.model.FlightElement
 
 class FlightItemAdapter(
     private val context: Context,
     private var item: List<FlightElement>,
-    private var listener: OnItemClickListener
+    private var listener: OnFlightItemClickListener
 ) : RecyclerView.Adapter<FlightItemAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -26,6 +26,7 @@ class FlightItemAdapter(
         val toWhereTxt: TextView = itemView.findViewById(R.id.toWhereTxt)
         val priceTxt: TextView = itemView.findViewById(R.id.priceTxt)
         val flightId : TextView =  itemView.findViewById(R.id.flightId)
+        val duration : TextView =  itemView.findViewById(R.id.durationTxt)
 
         init {
             itemView.setOnClickListener(this)
@@ -34,13 +35,14 @@ class FlightItemAdapter(
         override fun onClick(p0: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
+                val flightId = item[position].id
+                listener.onFlightItemClick(position, flightId)
             }
         }
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
+    interface OnFlightItemClickListener {
+        fun onFlightItemClick(position: Int, flightId : Long)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
@@ -57,6 +59,7 @@ class FlightItemAdapter(
         holder.toWhereTxt.text = item[position].landingCity
         holder.priceTxt.text = item[position].adultSeatPrice.toString()
         holder.flightId.text = item[position].id.toString()
+        holder.duration.text = item[position].duration.toString() + " Saat"
     }
 
     override fun getItemCount(): Int {

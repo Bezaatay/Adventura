@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bezalibrary.service.Functions
-import com.example.reservationproject.model.FlightElement
-import com.example.reservationproject.model.HotelElement
-import com.example.reservationproject.model.TourElement
+import com.example.bezalibrary.service.model.FlightElement
+import com.example.bezalibrary.service.model.HotelElement
+import com.example.bezalibrary.service.model.TourElement
 
 class HomeViewModel : ViewModel() {
 

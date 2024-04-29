@@ -42,8 +42,4 @@ object RetrofitClient {
         }
         return retrofit as Retrofit
     }
-    fun printBaseUrl()
-    {
-        Log.e("urll", this.getClient().baseUrl().toString())
-    }
 }
