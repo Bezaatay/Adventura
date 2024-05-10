@@ -20,11 +20,11 @@ class HotelItemAdapter(
 ) : RecyclerView.Adapter<HotelItemAdapter.ItemViewHolder>(), View.OnClickListener {
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val photoImgView: ImageView = itemView.findViewById(R.id.photoImgView)
-        val hotelNameTxt: TextView = itemView.findViewById(R.id.hotelNameTxt)
-        val locationTxt: TextView = itemView.findViewById(R.id.locationTxt)
-        val currencyTxt: TextView = itemView.findViewById(R.id.currencyTxt)
-        val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
+        private val photoImgView: ImageView = itemView.findViewById(R.id.photoImgView)
+        private val hotelNameTxt: TextView = itemView.findViewById(R.id.hotelNameTxt)
+        private val locationTxt: TextView = itemView.findViewById(R.id.locationTxt)
+        private val currencyTxt: TextView = itemView.findViewById(R.id.currencyTxt)
+        private val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
         val priceTxt: TextView = itemView.findViewById(R.id.priceTxt)
 
         init {
@@ -56,6 +56,7 @@ class HotelItemAdapter(
         return when (fragmentName) {
             "HomeFragment" -> R.layout.hotel_card_view
             "SeeAllHotelFragment" -> R.layout.hotel_card_view2
+            "SearchHotelFragment" -> R.layout.hotel_card_view2
             else -> throw IllegalArgumentException("Invalid fragment name provided")
         }
     }

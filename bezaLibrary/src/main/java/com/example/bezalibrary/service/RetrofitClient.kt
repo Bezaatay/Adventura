@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
 
-    private const val Base_URL = "https://www.finalproject.com.tr/"
+    private const val Base_URL = "https://www.finalproject.com.tr/api/"
     private var retrofit: Retrofit? = null
     private var authToken: String? = null
 

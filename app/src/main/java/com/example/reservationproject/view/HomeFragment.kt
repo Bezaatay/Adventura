@@ -14,10 +14,10 @@ import com.example.reservationproject.R
 import com.example.reservationproject.adapter.FlightItemAdapter
 import com.example.reservationproject.adapter.HotelItemAdapter
 import com.example.reservationproject.adapter.TourItemAdapter
-import com.example.reservationproject.databinding.FragmentHomeBinding
 import com.example.bezalibrary.service.model.FlightElement
 import com.example.bezalibrary.service.model.HotelElement
 import com.example.bezalibrary.service.model.TourElement
+import com.example.reservationproject.databinding.FragmentHomeBinding
 import com.example.reservationproject.viewmodel.HomeViewModel
 
 
@@ -73,7 +73,7 @@ class HomeFragment : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
         }
         viewModel.featuredFlights.observe(viewLifecycleOwner) {
             it.let {
-                val adapter = it?.let { it1 -> FlightItemAdapter(requireContext(), it1, this) }
+                val adapter = it?.let { it1 -> FlightItemAdapter(requireContext(), it1, this,"HomeFragment") }
                 binding.popFlightRV.adapter = adapter
             }
         }

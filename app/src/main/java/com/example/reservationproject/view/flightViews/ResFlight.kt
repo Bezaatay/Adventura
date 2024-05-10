@@ -1,52 +1,48 @@
 package com.example.reservationproject.view.flightViews
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.adapter.FlightItemAdapter
 import com.example.reservationproject.databinding.FragmentResFlightBinding
 import com.example.bezalibrary.service.model.FlightElement
+import com.example.reservationproject.adapter.FlightSearchBarAdapter
 import com.example.reservationproject.utils.DatePicker
 import com.example.reservationproject.viewmodel.ResFlightViewModel
 
-class ResFlight : Fragment(), FlightItemAdapter.OnFlightItemClickListener {
+class ResFlight : Fragment(), FlightItemAdapter.OnFlightItemClickListener,
+    FlightSearchBarAdapter.OnAirlineItemClickListener {
 
     private lateinit var binding: FragmentResFlightBinding
     private val viewModel: ResFlightViewModel by viewModels()
 
     private var flightItem = mutableListOf<FlightElement>()
+    private var selectedFlightId: Long? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentResFlightBinding.inflate(inflater, container, false)
 
-        val adultNumEdttx = binding.adultNumEdttx
-        val childNumEdttx = binding.childNumEdttx
-        val babyNumEdttx = binding.babyNumEdttx
-        val adultAdd = binding.adultAdd
-        val childAdd = binding.childAdd
-        val babyAdd = binding.babyAdd
-        val adultMinus = binding.adultMinus
-        val childMinus = binding.childMinus
-        val babyMinus = binding.babyMinus
-
         val functions = Functions()
 
         flightItem = ArrayList()
         binding.rv2.layoutManager = LinearLayoutManager(requireContext())
-        functions.getFeaturedFlights()
+        functions.getAirport()
 
         viewModel.featuredFlights.observe(viewLifecycleOwner) {
             it?.let {
-                val adapter = FlightItemAdapter(requireContext(), it, this)
+                val adapter = FlightItemAdapter(requireContext(), it, this, "ResFlight")
                 binding.rv2.adapter = adapter
             }
         }
@@ -58,29 +54,58 @@ class ResFlight : Fragment(), FlightItemAdapter.OnFlightItemClickListener {
         viewModel.toWhereText.observe(viewLifecycleOwner) {
             binding.toWhereEdttx.setText(it)
         }
-        viewModel.travelDate.observe(viewLifecycleOwner) { startDate ->
-            binding.startDateButton.text = startDate
+
+        binding.SearchFlightBtn.setOnClickListener {
+            val landingCity = binding.toWhereEdttx.text.toString()
+            val airportId = selectedFlightId
+            val selectedDate = binding.startDateButton.text
+
+            findNavController().navigate(
+                com.example.reservationproject.R.id.action_resFlight_to_searchFlightFragment,
+                Bundle().apply {
+                    if (airportId != null) {
+                        putLong("airportId", airportId)
+                        putString("departureAirport", binding.fromWhereEdttx.text.toString())
+                        putString("landingCity", landingCity)
+                        putString("date", selectedDate.toString())
+                    }
+                })
         }
 
-        binding.changeRotationBtn.setOnClickListener {
-            viewModel.swapTexts(binding.fromWhereEdttx.text, binding.toWhereEdttx.text)
+        functions.getAirport()
+
+        val listView = binding.searchbarRv
+
+        flightItem = ArrayList()
+        binding.searchbarRv.layoutManager = LinearLayoutManager(requireContext())
+        functions.getFeaturedFlights()
+
+        viewModel.airports.observe(viewLifecycleOwner) {
+            it?.let {
+                val adapter = FlightSearchBarAdapter(requireContext(), it, this)
+                binding.searchbarRv.adapter = adapter
+            }
         }
 
-        viewModel.adultNumber.observe(viewLifecycleOwner) { number ->
-            adultNumEdttx.text = number.toString()
+        binding.fromWhereEdttx.setOnClickListener {
+            listView.visibility = View.VISIBLE
         }
 
-        viewModel.childNumber.observe(viewLifecycleOwner) { number ->
-            childNumEdttx.text = number.toString()
+        binding.fromWhereEdttx.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.filterAirportNames(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+
+        binding.constraint.setOnClickListener {
+            listView.visibility = View.INVISIBLE
         }
 
-        viewModel.babyNumber.observe(viewLifecycleOwner) { number ->
-            babyNumEdttx.text = number.toString()
-        }
-
-        viewModel.selectedFlightType.observe(viewLifecycleOwner) { selectedFlightType ->
-            Log.e("FLIGHT TYPE", selectedFlightType)
-        }
         binding.travellerCons.setOnClickListener {
             DatePicker.DateUtil.showDatePicker(
                 requireContext(),
@@ -88,52 +113,19 @@ class ResFlight : Fragment(), FlightItemAdapter.OnFlightItemClickListener {
                 viewModel::setTravelDate
             )
         }
-        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val selectedRadioButton = binding.root.findViewById<RadioButton>(checkedId)
-            val selectedFlightType = selectedRadioButton.text.toString()
-
-            viewModel.setSelectedFlightType(selectedFlightType)
+        viewModel.travelDate.observe(viewLifecycleOwner) { startDate ->
+            binding.startDateButton.text = startDate
         }
-
-        binding.SearchFlightBtn.setOnClickListener {
-            val fromWhere = binding.fromWhereEdttx.text
-            val toWhere = binding.toWhereEdttx.text
-            val departureTime = binding.startDateButton.text
-            val adultSeat = binding.adultNumEdttx.text
-            val childSeat = binding.childNumEdttx.text
-            val babySeat = binding.babyNumEdttx.text
-            val flightType = viewModel.selectedFlightType.value
-            Log.e("flight info", "$fromWhere,$toWhere,$departureTime,$babySeat,$flightType")
-        }
-
-        adultAdd.setOnClickListener {
-            viewModel.incrementAdultNumber()
-        }
-
-        adultMinus.setOnClickListener {
-            viewModel.decrementAdultNumber()
-        }
-
-        childAdd.setOnClickListener {
-            viewModel.incrementChildNumber()
-        }
-
-        childMinus.setOnClickListener {
-            viewModel.decrementChildNumber()
-        }
-
-        babyAdd.setOnClickListener {
-            viewModel.incrementBabyNumber()
-        }
-
-        babyMinus.setOnClickListener {
-            viewModel.decrementBabyNumber()
-        }
-
         return binding.root
     }
-    override fun onFlightItemClick(position: Int, flightId: Long) {
-        Log.e("flightId",flightId.toString())
 
+    override fun onFlightItemClick(position: Int, flightId: Long) {
+        Log.e("flightId", flightId.toString())
+    }
+
+    override fun onAirlineItemClick(position: Int, airlineId: Long, airlineName: String) {
+        binding.fromWhereEdttx.setText(airlineName)
+        binding.searchbarRv.visibility = View.INVISIBLE
+        selectedFlightId = airlineId
     }
 }

@@ -75,3 +75,11 @@ data class HotelRoomElement (
     val hotelID: Long,
     val hotelName: String
 )
+data class AirportElement(
+    val id : Long,
+    val name : String
+)
+data class LocationElement(
+    val id : Long,
+    val name : String
+)

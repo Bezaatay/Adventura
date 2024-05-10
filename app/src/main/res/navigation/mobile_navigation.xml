@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_resFlight_to_itemFragment"
             app:destination="@id/itemFragment" />
+        <action
+            android:id="@+id/action_resFlight_to_searchFlightFragment"
+            app:destination="@id/searchFlightFragment" />
     </fragment>
     <fragment
         android:id="@+id/resTour"
@@ -67,6 +70,9 @@
         <action
             android:id="@+id/action_resHotel_to_itemFragment"
             app:destination="@id/itemFragment" />
+        <action
+            android:id="@+id/action_resHotel_to_searchHotelFragment"
+            app:destination="@id/searchHotelFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
@@ -95,7 +101,11 @@
         android:id="@+id/hotelRoomFragment"
         android:name="com.example.reservationproject.view.hotelViews.HotelRoomFragment"
         android:label="fragment_hotel_room"
-        tools:layout="@layout/fragment_hotel_room" />
+        tools:layout="@layout/fragment_hotel_room" >
+        <action
+            android:id="@+id/action_hotelRoomFragment_to_roomItemFragment"
+            app:destination="@id/roomItemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tourItemFragment"
         android:name="com.example.reservationproject.view.tourViews.TourItemFragment"
@@ -116,4 +126,23 @@
         android:name="com.example.reservationproject.view.flightViews.SeeAllFlightsFragment"
         android:label="fragment_see_all_flights"
         tools:layout="@layout/fragment_see_all_flights" />
+    <fragment
+        android:id="@+id/searchFlightFragment"
+        android:name="com.example.reservationproject.view.flightViews.SearchFlightFragment"
+        android:label="fragment_search_flight"
+        tools:layout="@layout/fragment_search_flight" />
+    <fragment
+        android:id="@+id/roomItemFragment"
+        android:name="com.example.reservationproject.view.hotelViews.RoomItemFragment"
+        android:label="fragment_room_item"
+        tools:layout="@layout/fragment_room_item" />
+    <fragment
+        android:id="@+id/searchHotelFragment"
+        android:name="com.example.reservationproject.view.hotelViews.SearchHotelFragment"
+        android:label="fragment_search_hotel"
+        tools:layout="@layout/fragment_search_hotel" >
+        <action
+            android:id="@+id/action_searchHotelFragment_to_hotelRoomFragment"
+            app:destination="@id/hotelRoomFragment" />
+    </fragment>
 </navigation>

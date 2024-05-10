@@ -2,6 +2,7 @@ package com.example.reservationproject.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,10 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        val token = AppPref(requireContext()).getToken()
+        if(token!=null){
+            binding.logBtn.visibility = View.INVISIBLE
+        }
         binding.logBtn.setOnClickListener {
             val intent = Intent(requireContext(), LogRegActivity::class.java)
             startActivity(intent)

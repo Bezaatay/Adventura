@@ -67,4 +67,13 @@
     <string name="choose_hotel_find_room">Beğendiğin oteli seç istediğin odayı rezerve et ve tatile Başla!</string>
     <string name="description">description</string>
     <string name="find_place_to_abroad">Gezmek istediğin yeri seç! Biletini al yolculuğa başla!</string>
+    <string name="select_airport">Havaalanı Seçiniz</string>
+    <string name="clock_1">kaçtan</string>
+    <string name="clock_2">kaça</string>
+    <string name="curreny_type_lira">₺</string>
+    <string name="before_day">Önceki gün</string>
+    <string name="next_day">Sonraki gün</string>
+    <string name="price">price</string>
+    <string name="filter">Filtrele</string>
+    <string name="sort">Sırala</string>
 </resources>

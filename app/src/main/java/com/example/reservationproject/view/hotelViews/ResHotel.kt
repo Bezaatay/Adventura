@@ -1,25 +1,33 @@
 package com.example.reservationproject.view.hotelViews
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.adapter.HotelItemAdapter
 import com.example.reservationproject.databinding.FragmentResHotelBinding
 import com.example.bezalibrary.service.model.HotelElement
+import com.example.reservationproject.R
+import com.example.reservationproject.adapter.LocationSearchBarAdapter
 import com.example.reservationproject.utils.DatePicker
 import com.example.reservationproject.viewmodel.ResHotelViewModel
 
-class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener {
+class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
+    LocationSearchBarAdapter.OnLocationItemClickListener {
 
     private lateinit var binding: FragmentResHotelBinding
     private val viewModel: ResHotelViewModel by viewModels()
     private var hotelItem = mutableListOf<HotelElement>()
+    private var selectedlocationId: Long? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,40 +47,56 @@ class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener {
                 binding.rv.adapter = adapter
             }
         }
-        val startDateButton = binding.startDateButton
-        val endDateButton = binding.endDateButton
 
-        viewModel.startDate.observe(viewLifecycleOwner) { startDate ->
-            startDateButton.text = startDate
+        val listView = binding.searchbarRv
+
+        binding.searchbarRv.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.fetchLocation()
+
+        viewModel.locations.observe(viewLifecycleOwner) {
+            it?.let {
+                val adapter = LocationSearchBarAdapter(requireContext(), it, this)
+                binding.searchbarRv.adapter = adapter
+            }
+            binding.searchText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    viewModel.filterLocationNames(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
+
         }
-
-        viewModel.endDate.observe(viewLifecycleOwner) { endDate ->
-            endDateButton.text = endDate
+        binding.constraint.setOnClickListener {
+            listView.visibility = View.INVISIBLE
         }
-
-        binding.startCons.setOnClickListener {
-            DatePicker.DateUtil.showDatePicker(
-                requireContext(),
-                viewModel.startDate.value,
-                viewModel::setStartDate
-            )
+        binding.searchText.setOnClickListener {
+            listView.visibility = View.VISIBLE
         }
-
-        binding.endCons.setOnClickListener {
-            DatePicker.DateUtil.showDatePicker(
-                requireContext(),
-                viewModel.endDate.value,
-                viewModel::setEndDate
-            )
+        binding.SearchHotelBtn.setOnClickListener {
+            val locationId = selectedlocationId
+            findNavController().navigate(R.id.action_resHotel_to_searchHotelFragment,Bundle().apply {
+                if(locationId != null){
+                    selectedlocationId?.let { it1 -> putLong("locationId", it1) }
+                }
+            })
         }
-
         return binding.root
     }
 
     override fun onHotelItemClick(itemId: Long) {
-        // Tıklanan öğenin ID'sini burada kullanın
-        // Örneğin, bir Toast mesajıyla göstermek için:
-        Toast.makeText(requireContext(), "Tıklanan öğe ID: $itemId", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_resHotel_to_itemFragment, Bundle().apply {
+            putLong("itemId", itemId)
+            Log.e("itemid",itemId.toString())
+        })
     }
 
+    override fun onLocationNameItemClick(position: Int, locationId: Long, locationName: String) {
+        binding.searchText.setText(locationName)
+        binding.searchbarRv.visibility = View.INVISIBLE
+        selectedlocationId = locationId
+    }
 }

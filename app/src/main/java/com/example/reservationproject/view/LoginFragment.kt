@@ -3,6 +3,7 @@ package com.example.reservationproject.view
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -99,7 +100,10 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-
+        viewModel.token.observe(viewLifecycleOwner){
+            appPref.saveToken(it)
+            Log.e("token is",it)
+        }
         binding.loginBtn.setOnClickListener {
 
             if (binding.mailTxt.text.isEmpty()) {

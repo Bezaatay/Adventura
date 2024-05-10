@@ -34,7 +34,7 @@ class SeeAllFlightsFragment : Fragment() , FlightItemAdapter.OnFlightItemClickLi
 
         viewModel.featuredFlight.observe(viewLifecycleOwner) {
             it.let {
-                val adapter = it?.let { it1 -> FlightItemAdapter(requireContext(), it1, this) }
+                val adapter = it?.let { it1 -> FlightItemAdapter(requireContext(), it1, this, "HomeFragment") }
                 binding.rv.adapter = adapter
             }
         }

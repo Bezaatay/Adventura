@@ -1,6 +1,7 @@
 package com.example.reservationproject.view.hotelViews
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,22 +12,20 @@ import com.bumptech.glide.Glide
 import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.R
 import com.example.reservationproject.databinding.FragmentHotelItemBinding
-import com.example.reservationproject.viewmodel.ItemViewModel
+import com.example.reservationproject.viewmodel.HotelItemViewModel
 
 class HotelItemFragment : Fragment() {
     private lateinit var binding: FragmentHotelItemBinding
-    private val viewModel: ItemViewModel by viewModels()
+    private val viewModel: HotelItemViewModel by viewModels()
     val functions = Functions()
-    var hotelId: String? = null
+    private var hotelId: String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHotelItemBinding.inflate(inflater, container, false)
 
-        val itemId = requireArguments().getLong("itemId")
-
-        viewModel.fetchHotelById(itemId)
+        viewModel.fetchHotelById(requireArguments().getLong("itemId"))
 
         viewModel.featuredHotels.observe(viewLifecycleOwner) { hotel ->
             hotelId = hotel.id.toString()

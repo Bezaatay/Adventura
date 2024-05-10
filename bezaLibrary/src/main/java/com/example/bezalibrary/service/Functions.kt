@@ -3,12 +3,14 @@ package com.example.bezalibrary.service
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.bezalibrary.service.model.AirportElement
 import com.example.bezalibrary.service.repo.AuthService
 import com.example.bezalibrary.service.repo.ServiceInterface
 import com.example.bezalibrary.service.model.BlogElement
 import com.example.bezalibrary.service.model.FlightElement
 import com.example.bezalibrary.service.model.HotelElement
 import com.example.bezalibrary.service.model.HotelRoomElement
+import com.example.bezalibrary.service.model.LocationElement
 import com.example.reservationproject.model.NewUser
 import com.example.reservationproject.model.RegisterResponse
 import com.example.bezalibrary.service.model.TourElement
@@ -21,16 +23,11 @@ import retrofit2.Response
 class Functions {
     private val retrofit = RetrofitClient
     private val service = retrofit.getClient().create(ServiceInterface::class.java)
-    private val LoginService = retrofit.getClient().create(AuthService::class.java)
+    private val loginService = retrofit.getClient().create(AuthService::class.java)
     val errorMessageLiveData = MutableLiveData<String>()
 
     companion object {
         var token: String? = null
-    }
-
-    interface LoginListen {
-        fun onLoginSuccess(token: String)
-        fun onLoginFailure(error: String)
     }
 
     fun getFeaturedFlights(): LiveData<List<FlightElement>> {
@@ -105,7 +102,7 @@ class Functions {
         val user = UserLogin(username, password)
         val liveData = MutableLiveData<String>()
 
-        LoginService.auth(user).enqueue(object : Callback<UserLoginResponse> {
+        loginService.auth(user).enqueue(object : Callback<UserLoginResponse> {
             override fun onResponse(
                 call: Call<UserLoginResponse>,
                 response: Response<UserLoginResponse>
@@ -126,7 +123,7 @@ class Functions {
     }
 
     fun createUser(newUser: NewUser) {
-        LoginService.createUser(newUser).enqueue(object : Callback<RegisterResponse> {
+        loginService.createUser(newUser).enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(
                 call: Call<RegisterResponse>,
                 response: Response<RegisterResponse>
@@ -181,6 +178,26 @@ class Functions {
             }
 
             override fun onFailure(call: Call<HotelElement>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun getRoomById(id: Long): LiveData<HotelRoomElement> {
+        val liveData = MutableLiveData<HotelRoomElement>()
+
+        service.getRoomById(id).enqueue(object : Callback<HotelRoomElement> {
+            override fun onResponse(
+                call: Call<HotelRoomElement>,
+                response: Response<HotelRoomElement>
+            ) {
+                val data = response.body()
+                liveData.value = data
+            }
+
+            override fun onFailure(call: Call<HotelRoomElement>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
             }
         })
         return liveData
@@ -197,7 +214,7 @@ class Functions {
                 val responseBody = response.body()
                 if (responseBody != null) {
                     liveData.value = response.body()
-                    Log.e("DATA",response.body().toString())
+                    Log.e("DATA", response.body().toString())
                 } else {
                     Log.e("beyza", "response body is null")
                 }
@@ -205,6 +222,99 @@ class Functions {
 
             override fun onFailure(call: Call<List<HotelRoomElement>>, t: Throwable) {
                 Log.e("room Hata", t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun getAirport(): LiveData<List<AirportElement>> {
+        val liveData = MutableLiveData<List<AirportElement>>()
+
+        service.getAirport().enqueue(object : Callback<List<AirportElement>> {
+            override fun onResponse(
+                call: Call<List<AirportElement>>,
+                response: Response<List<AirportElement>>
+            ) {
+                val responseBody = response.body()
+                if (responseBody != null) {
+                    liveData.value = response.body()
+                } else {
+                    Log.e("airportList post", "response body is null")
+                }
+            }
+
+            override fun onFailure(call: Call<List<AirportElement>>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun searchFlightByAirportId(
+        airportId: Long,
+        landingCity: String?
+    ): LiveData<List<FlightElement>> {
+        val liveData = MutableLiveData<List<FlightElement>>()
+
+        if (landingCity != null) {
+            service.searchFlightByAirportId(airportId, landingCity)
+                .enqueue(object : Callback<List<FlightElement>> {
+                    override fun onResponse(
+                        call: Call<List<FlightElement>>,
+                        response: Response<List<FlightElement>>
+                    ) {
+                        if (response.body() != null) {
+                            liveData.value = response.body()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<FlightElement>>, t: Throwable) {
+                        errorMessageLiveData.postValue(t.message.toString())
+                    }
+                })
+        }
+        return liveData
+    }
+
+    fun getLocation(): LiveData<List<LocationElement>> {
+        val liveData = MutableLiveData<List<LocationElement>>()
+
+        service.getLocation().enqueue(object : Callback<List<LocationElement>> {
+            override fun onResponse(
+                call: Call<List<LocationElement>>,
+                response: Response<List<LocationElement>>
+            ) {
+                if (response.body() != null) {
+                    liveData.value = response.body()
+                } else {
+                    Log.e("locationList post", "response body is null")
+                }
+            }
+
+            override fun onFailure(call: Call<List<LocationElement>>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun getHotelByLocationId(id: Long): LiveData<List<HotelElement>> {
+        val liveData = MutableLiveData<List<HotelElement>>()
+
+        service.getHotelByLocationId(id).enqueue(object : Callback<List<HotelElement>> {
+            override fun onResponse(
+                call: Call<List<HotelElement>>,
+                response: Response<List<HotelElement>>
+            ) {
+                val data = response.body()
+                if (data != null) {
+                    liveData.value = data
+                    Log.e("data", data.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<List<HotelElement>>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
             }
         })
         return liveData

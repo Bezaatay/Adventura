@@ -9,13 +9,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/constraint">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="290dp"
             android:background="@drawable/bottom_radius_background"
             android:paddingLeft="6dp"
             android:paddingTop="6dp"
@@ -23,6 +24,21 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="6dp">
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchbar_rv"
+                android:layout_width="209dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:numColumns="5"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/fromWhereEdttx"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/fromWhereEdttx"
+                app:layout_constraintTop_toBottomOf="@+id/fromWhereEdttx" />
 
             <TextView
                 android:id="@+id/SearchFlightBtn"
@@ -56,7 +72,7 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/calendar"
+                    android:src="@drawable/white_calendar"
                     app:layout_constraintBottom_toBottomOf="@+id/textView6"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -71,8 +87,9 @@
                     android:text="@string/lbl_date"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView6"
+                    app:layout_constraintHorizontal_bias="0.081"
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
                     app:layout_constraintTop_toBottomOf="@+id/textView6"
                     tools:ignore="RtlSymmetry" />
 
@@ -95,7 +112,7 @@
                 android:id="@+id/imageView7"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:src="@drawable/plane_departure"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,12 +120,12 @@
 
             <EditText
                 android:id="@+id/fromWhereEdttx"
-                android:layout_width="130dp"
+                android:layout_width="210dp"
                 android:layout_height="19dp"
                 android:layout_marginTop="2dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="@string/select_city"
+                android:hint="@string/select_airport"
                 android:inputType="text"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
@@ -134,15 +151,15 @@
 
             <EditText
                 android:id="@+id/toWhereEdttx"
-                android:layout_width="130dp"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:hint="@string/select_city"
                 android:inputType="text"
-                android:textColorHint="@color/white"
                 android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView9"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -153,7 +170,7 @@
                 android:id="@+id/imageView8"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginBottom="29dp"
                 android:src="@drawable/plane_arrival"
                 app:layout_constraintBottom_toTopOf="@+id/travellerCons"
@@ -180,248 +197,11 @@
                 android:layout_width="50dp"
                 android:layout_height="38dp"
                 android:layout_marginTop="48dp"
-                android:layout_marginEnd="45dp"
+                android:layout_marginEnd="32dp"
                 android:padding="3dp"
                 android:src="@drawable/exchange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="180dp"
-                android:layout_marginEnd="7dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
-
-                <RadioButton
-                    android:id="@+id/businessRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="@string/business"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-
-                <RadioButton
-                    android:id="@+id/economyRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="@string/economy"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-            </RadioGroup>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout5"
-                android:layout_width="208dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.057"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/travellerCons">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="6dp"
-                    android:src="@drawable/users"
-                    app:layout_constraintEnd_toStartOf="@+id/textView7"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="72dp"
-                    android:text="@string/traveller"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/childNumEdttx"
-                    android:layout_width="25dp"
-                    android:layout_height="19dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:text="@string/_1"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/childMinus"
-                    app:layout_constraintStart_toEndOf="@+id/childMinus"
-                    app:layout_constraintTop_toTopOf="@+id/childMinus"
-                    tools:ignore="TextViewEdits" />
-
-                <TextView
-                    android:id="@+id/babyNumEdttx"
-                    android:layout_width="25dp"
-                    android:layout_height="19dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:text="@string/_1"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/babyMinus"
-                    app:layout_constraintStart_toEndOf="@+id/babyMinus"
-                    app:layout_constraintTop_toTopOf="@+id/babyMinus"
-                    tools:ignore="TextViewEdits" />
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="1dp"
-                    android:text="@string/child"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/baby"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-                <ImageView
-                    android:id="@+id/childAdd"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="33dp"
-                    android:src="@drawable/add"
-                    app:layout_constraintBottom_toBottomOf="@+id/childMinus"
-                    app:layout_constraintStart_toEndOf="@+id/childMinus"
-                    app:layout_constraintTop_toTopOf="@+id/childMinus" />
-
-                <ImageView
-                    android:id="@+id/babyAdd"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="33dp"
-                    android:src="@drawable/add"
-                    app:layout_constraintBottom_toBottomOf="@+id/babyMinus"
-                    app:layout_constraintStart_toEndOf="@+id/babyMinus"
-                    app:layout_constraintTop_toTopOf="@+id/babyMinus" />
-
-                <ImageView
-                    android:id="@+id/childMinus"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="82dp"
-                    android:layout_marginBottom="5dp"
-                    android:src="@drawable/minus"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                    app:layout_constraintStart_toEndOf="@+id/textView12"
-                    app:layout_constraintTop_toTopOf="@+id/textView12" />
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:hint="@string/child_age"
-                    android:textColorHint="@color/white"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                    app:layout_constraintStart_toEndOf="@+id/textView12"
-                    app:layout_constraintTop_toTopOf="@+id/textView12"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:hint="@string/baby_age"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                    app:layout_constraintStart_toEndOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="@+id/textView13"
-                    app:layout_constraintVertical_bias="1.0"
-                    tools:ignore="SmallSp" />
-
-                <ImageView
-                    android:id="@+id/babyMinus"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="82dp"
-                    android:src="@drawable/minus"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                    app:layout_constraintStart_toEndOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="@+id/textView13" />
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/adult"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
-
-                <TextView
-                    android:id="@+id/adultNumEdttx"
-                    android:layout_width="25dp"
-                    android:layout_height="19dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:text="@string/_1"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/adultMinus"
-                    app:layout_constraintStart_toEndOf="@+id/adultMinus"
-                    app:layout_constraintTop_toTopOf="@+id/adultMinus"
-                    tools:ignore="TextViewEdits" />
-
-                <ImageView
-                    android:id="@+id/adultMinus"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="72dp"
-                    android:src="@drawable/minus"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView11"
-                    app:layout_constraintStart_toEndOf="@+id/textView11"
-                    app:layout_constraintTop_toTopOf="@+id/textView11" />
-
-                <ImageView
-                    android:id="@+id/adultAdd"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="32dp"
-                    android:src="@drawable/add"
-                    app:layout_constraintBottom_toBottomOf="@+id/adultMinus"
-                    app:layout_constraintStart_toEndOf="@+id/adultMinus"
-                    app:layout_constraintTop_toTopOf="@+id/adultMinus" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:layout_width="350dp"
@@ -439,7 +219,7 @@
                 android:layout_marginTop="6dp"
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.322"
+                app:layout_constraintHorizontal_bias="0.389"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fromWhereEdttx" />
 

@@ -45,7 +45,6 @@ class SeeAllHotelFragment : Fragment(), HotelItemAdapter.OnHotelItemClickListene
     }
 
     override fun onHotelItemClick(itemId: Long) {
-        Log.e("ID",itemId.toString())
         findNavController().navigate(R.id.action_seeAllHotelFragment_to_hotelRoomFragment, Bundle().apply {
             putLong("itemId",itemId)
         })
