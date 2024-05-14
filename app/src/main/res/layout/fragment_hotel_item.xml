@@ -57,12 +57,12 @@
             android:layout_width="wrap_content"
             android:layout_height="57dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="82dp"
+            android:layout_marginEnd="108dp"
             android:isIndicator="true"
             android:scaleX="0.6"
             android:scaleY="0.6"
             app:layout_constraintBottom_toTopOf="@+id/hotelNameTxt"
-            app:layout_constraintEnd_toStartOf="@+id/currencyTxt"
+            app:layout_constraintEnd_toStartOf="@+id/priceTxt"
             app:layout_constraintTop_toBottomOf="@+id/photoImgView"
             app:layout_constraintVertical_bias="0.529" />
 
@@ -78,17 +78,6 @@
             app:layout_constraintBottom_toTopOf="@+id/textView17"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/photoImgView" />
-
-        <TextView
-            android:id="@+id/currencyTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
-            android:text="@string/currency_type"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/priceTxt"
-            app:layout_constraintEnd_toStartOf="@+id/priceTxt"
-            app:layout_constraintTop_toTopOf="@+id/priceTxt" />
 
         <ImageView
             android:id="@+id/photoImgView"

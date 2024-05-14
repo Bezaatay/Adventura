@@ -51,7 +51,7 @@ class HotelRoomAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         Glide.with(context).load(item[position].roomImage).into(holder.roomPhoto)
-        holder.roomPrice.text = item[position].roomPrice.toString()
+        holder.roomPrice.text = item[position].roomPrice.toString() + "₺"
         holder.roomType.text = item[position].roomType +" Oda"
     }
 

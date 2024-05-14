@@ -1,10 +1,14 @@
 package com.example.reservationproject.viewmodel
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bezalibrary.service.Functions
 import com.example.bezalibrary.service.model.HotelRoomElement
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -14,6 +18,9 @@ class RoomItemViewModel : ViewModel() {
 
     private val _room = MutableLiveData<HotelRoomElement>()
     val room: MutableLiveData<HotelRoomElement> get() = _room
+
+    private val  _isRoomAvailable = MutableLiveData<Boolean>()
+    val  isRoomAvailable :MutableLiveData<Boolean> get() = _isRoomAvailable
     fun fetchRoomById(long: Long) {
         functions.getRoomById(long).observeForever {
             room.value= it
@@ -54,5 +61,35 @@ class RoomItemViewModel : ViewModel() {
         val dateFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(dateFormat, Locale.getDefault())
         return sdf.format(calendar.time)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkReservation(roomId: Long, checkIn: String, checkOut: String) {
+        functions.checkReservation(roomId,convertDateFormat(checkIn),convertDateFormat(checkOut)).observeForever{
+        _isRoomAvailable.value = it
+        }
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun convertDateFormat(inputDate: String): String {
+        val inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault())
+        val outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'00:00:00", Locale.getDefault())
+
+        return try {
+            val date = LocalDate.parse(inputDate, inputFormatter)
+            date.format(outputFormatter)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ""
+        }
+    }
+    fun findDaysBetweenDates(checkIn: String, checkOut: String): Int {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
+        val checkInDate = dateFormat.parse(checkIn)
+        val checkOutDate = dateFormat.parse(checkOut)
+
+        val difference = checkOutDate.time - checkInDate.time
+
+        return (difference / (1000 * 60 * 60 * 24)).toInt()
     }
 }

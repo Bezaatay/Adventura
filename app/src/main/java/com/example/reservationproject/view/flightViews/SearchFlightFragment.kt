@@ -7,21 +7,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.adapter.FlightItem1Adapter
 import com.example.reservationproject.databinding.FragmentSearchFlightBinding
+import com.example.reservationproject.utils.DateFunctions.convertStringToDate
+import com.example.reservationproject.utils.DateFunctions.decreaseDateByOneDay
+import com.example.reservationproject.utils.DateFunctions.formatDate
+import com.example.reservationproject.utils.DateFunctions.formatDateToMountAndDay
+import com.example.reservationproject.utils.DateFunctions.formatDateToString
+import com.example.reservationproject.utils.DateFunctions.increaseDateByOneDay
 import com.example.reservationproject.viewmodel.SearchFlightViewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class SearchFlightFragment : Fragment(), FlightItem1Adapter.OnFlight1ItemClickListener {
 
     private lateinit var binding: FragmentSearchFlightBinding
     private val viewModel: SearchFlightViewModel by viewModels()
+    private var selectedDate: Date? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -35,43 +44,58 @@ class SearchFlightFragment : Fragment(), FlightItem1Adapter.OnFlight1ItemClickLi
         val departureAirport = requireArguments().getString("departureAirport")
         val date = requireArguments().getString("date")
 
+        if (date != null) {
+            Log.e("date", date)
+            selectedDate = convertStringToDate(date)
+            viewModel.fetchFlightsByAirportId(airportId, landingCity, date)
+        } else {
+            Toast.makeText(requireContext(), "Tarih seçiniz!", Toast.LENGTH_SHORT).show()
+        }
+
         binding.fromWhereTxt.text = departureAirport
         binding.toWhereTxt.text = landingCity
         binding.dateTxt.text = date?.let { formatDate(it) }
-
-        if (date != null) {
-            viewModel.fetchFlightsByAirportId(airportId, landingCity, date)
-        }
-
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.flights.observe(viewLifecycleOwner) {
             if (it.isNullOrEmpty()) {
                 binding.cannotFindTxt.visibility = View.VISIBLE
+                binding.rv.visibility = View.INVISIBLE
             } else {
                 val adapter = FlightItem1Adapter(requireContext(), it, this)
+                binding.rv.visibility = View.VISIBLE
                 binding.rv.adapter = adapter
+                binding.cannotFindTxt.visibility = View.INVISIBLE
             }
+        }
+        binding.nextDayCons.setOnClickListener {
+            val nextDay = increaseDateByOneDay(selectedDate!!)
+            binding.dateTxt.text = formatDateToMountAndDay(nextDay)
+            selectedDate = nextDay
+            viewModel.fetchFlightsByAirportId(
+                airportId,
+                landingCity,
+                formatDateToString(selectedDate!!)
+            )
+        }
+        binding.previousDayCons.setOnClickListener {
+            val previousDay = decreaseDateByOneDay(selectedDate!!)
+            binding.dateTxt.text = formatDateToMountAndDay(previousDay)
+            selectedDate = previousDay
+            viewModel.fetchFlightsByAirportId(
+                airportId,
+                landingCity,
+                formatDateToString(selectedDate!!)
+            )
+        }
+        binding.imageView14.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
         return binding.root
     }
 
-
     override fun onFlight1ItemClick(position: Int, flightIdd: Long) {
         Log.e("item id", flightIdd.toString())
-    }
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun formatDate(inputDate: String): String {
-        val inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault())
-        val outputFormatter = DateTimeFormatter.ofPattern("dd MMMM", Locale.getDefault())
-
-        return try {
-            val date = LocalDate.parse(inputDate, inputFormatter)
-            date.format(outputFormatter)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            ""
-        }
     }
 }

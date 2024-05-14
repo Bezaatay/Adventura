@@ -61,6 +61,12 @@
         <action
             android:id="@+id/action_resTour_to_itemFragment"
             app:destination="@id/itemFragment" />
+        <action
+            android:id="@+id/action_resTour_to_tourItemFragment"
+            app:destination="@id/tourItemFragment" />
+        <action
+            android:id="@+id/action_resTour_to_searchTourFragment"
+            app:destination="@id/searchTourFragment" />
     </fragment>
     <fragment
         android:id="@+id/resHotel"
@@ -144,5 +150,14 @@
         <action
             android:id="@+id/action_searchHotelFragment_to_hotelRoomFragment"
             app:destination="@id/hotelRoomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchTourFragment"
+        android:name="com.example.reservationproject.view.tourViews.SearchTourFragment"
+        android:label="fragment_search_tour"
+        tools:layout="@layout/fragment_search_tour" >
+        <action
+            android:id="@+id/action_searchTourFragment_to_tourItemFragment"
+            app:destination="@id/tourItemFragment" />
     </fragment>
 </navigation>

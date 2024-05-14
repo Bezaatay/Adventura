@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -57,6 +58,16 @@ class HomeFragment : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
         functions.getFeaturedFlights()
         functions.getFeaturedHotels()
         functions.getFeaturedTours()
+
+        viewModel.isLoadingF.observe(viewLifecycleOwner){
+            binding.progressBarF.isVisible = it
+        }
+        viewModel.isLoadingH.observe(viewLifecycleOwner){
+            binding.progressBarH.isVisible = it
+        }
+        viewModel.isLoadingT.observe(viewLifecycleOwner){
+            binding.progressBarT.isVisible = it
+        }
 
         viewModel.featuredHotels.observe(viewLifecycleOwner) {
             it.let {

@@ -17,7 +17,6 @@ import com.example.reservationproject.databinding.FragmentResHotelBinding
 import com.example.bezalibrary.service.model.HotelElement
 import com.example.reservationproject.R
 import com.example.reservationproject.adapter.LocationSearchBarAdapter
-import com.example.reservationproject.utils.DatePicker
 import com.example.reservationproject.viewmodel.ResHotelViewModel
 
 class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
@@ -26,7 +25,7 @@ class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
     private lateinit var binding: FragmentResHotelBinding
     private val viewModel: ResHotelViewModel by viewModels()
     private var hotelItem = mutableListOf<HotelElement>()
-    private var selectedlocationId: Long? = null
+    private var selectedLocationId: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,10 +76,10 @@ class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
             listView.visibility = View.VISIBLE
         }
         binding.SearchHotelBtn.setOnClickListener {
-            val locationId = selectedlocationId
+            val locationId = selectedLocationId
             findNavController().navigate(R.id.action_resHotel_to_searchHotelFragment,Bundle().apply {
                 if(locationId != null){
-                    selectedlocationId?.let { it1 -> putLong("locationId", it1) }
+                    selectedLocationId?.let { it1 -> putLong("locationId", it1) }
                 }
             })
         }
@@ -97,6 +96,6 @@ class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
     override fun onLocationNameItemClick(position: Int, locationId: Long, locationName: String) {
         binding.searchText.setText(locationName)
         binding.searchbarRv.visibility = View.INVISIBLE
-        selectedlocationId = locationId
+        selectedLocationId = locationId
     }
 }

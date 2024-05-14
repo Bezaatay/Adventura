@@ -4,9 +4,12 @@ import com.example.bezalibrary.service.model.AirportElement
 import com.example.bezalibrary.service.model.BlogElement
 import com.example.bezalibrary.service.model.FlightElement
 import com.example.bezalibrary.service.model.HotelElement
+import com.example.bezalibrary.service.model.HotelReservationCheck
 import com.example.bezalibrary.service.model.HotelRoomElement
 import com.example.bezalibrary.service.model.LocationElement
 import com.example.bezalibrary.service.model.TourElement
+import com.example.bezalibrary.service.model.TourLocation
+import com.example.bezalibrary.service.model.TourTypeElement
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -38,11 +41,32 @@ interface ServiceInterface {
     fun getAirport(): Call<List<AirportElement>>
 
     @GET("FlightReserve/GetFlightsByAirport")
-    fun searchFlightByAirportId(@Query("airportid") id: Long, @Query("LandingCity") landingCity: String): Call<List<FlightElement>>
+    fun searchFlightByAirportId(
+        @Query("airportid") id: Long,
+        @Query("LandingCity") landingCity: String
+    ): Call<List<FlightElement>>
 
     @GET("Locations/GetAllLocations")
     fun getLocation(): Call<List<LocationElement>>
 
     @GET("FilterHotels/GetHotelsByLocation")
     fun getHotelByLocationId(@Query("locationID") id: Long): Call<List<HotelElement>>
+
+    @GET("HotelReservation/GetAllHoteReservations")
+    fun hotelReservationsCheck(): Call<List<HotelReservationCheck>>
+
+    @GET("Tours/TourList")
+    fun getTourList(): Call<List<TourElement>>
+
+    @GET("Tours/TourList")
+    fun getTourLocation(): Call<List<TourLocation>>
+
+    @GET("Tours/GetTour/{id}")
+    fun getTourById(@Path("id") id: Long): Call<TourElement>
+
+    @GET("TourType/TourTypeList")
+    fun getTourType(): Call<List<TourTypeElement>>
+
+    @GET("FilterTours/GetToursByTourtype")
+    fun getToursByTourTypeId(@Query("tourTypeId") long: Long) : Call<List<TourElement>>
 }

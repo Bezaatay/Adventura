@@ -29,8 +29,6 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private val viewModel: RegisterViewModel by viewModels()
 
-    val nameEdttxt: EditText by lazy { binding.nameTxt }
-    val surnameEdttxt: EditText by lazy { binding.surnameTxt }
     val mailEdttxt: EditText by lazy { binding.mailTxt }
     val usernameEdttxt: EditText by lazy { binding.usernameTxt }
     val passwordEdttxt: EditText by lazy { binding.PasswTxt }
@@ -119,8 +117,11 @@ class RegisterFragment : Fragment() {
                         binding.nameTxt.text.toString(),
                         binding.surnameTxt.text.toString()
                     )
-                   functions.createUser(user)
-
+                    functions.createUser(user)
+                    appPref.saveNameAndSurname(
+                        binding.nameTxt.text.toString(),
+                        binding.surnameTxt.text.toString()
+                    )
                     showCreatedUserDialog()
                 }
 
@@ -216,6 +217,7 @@ class RegisterFragment : Fragment() {
                     username
                 ))
     }
+
     private fun showCreatedUserDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Log Out")

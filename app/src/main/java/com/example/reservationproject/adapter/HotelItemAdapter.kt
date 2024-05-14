@@ -23,7 +23,6 @@ class HotelItemAdapter(
         private val photoImgView: ImageView = itemView.findViewById(R.id.photoImgView)
         private val hotelNameTxt: TextView = itemView.findViewById(R.id.hotelNameTxt)
         private val locationTxt: TextView = itemView.findViewById(R.id.locationTxt)
-        private val currencyTxt: TextView = itemView.findViewById(R.id.currencyTxt)
         private val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
         val priceTxt: TextView = itemView.findViewById(R.id.priceTxt)
 
@@ -36,8 +35,7 @@ class HotelItemAdapter(
             Glide.with(context).load(hotelElement.image).into(photoImgView)
             hotelNameTxt.text = hotelElement.name
             locationTxt.text = hotelElement.locationName
-            currencyTxt.text = hotelElement.currencyName
-            priceTxt.text = hotelElement.price.toString()
+            priceTxt.text = hotelElement.price.toString() + hotelElement.currencyName
             ratingBar.rating = hotelElement.stars.toFloat()
         }
     }

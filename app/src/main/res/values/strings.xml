@@ -76,4 +76,6 @@
     <string name="price">price</string>
     <string name="filter">Filtrele</string>
     <string name="sort">Sırala</string>
+    <string name="tour_name">Tour Name</string>
+    <string name="my_account">Hesabım</string>
 </resources>

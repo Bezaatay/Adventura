@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/constraint">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
@@ -24,6 +25,37 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchbar"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:numColumns="5"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/searchText"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toStartOf="@+id/searchText"
+                app:layout_constraintTop_toBottomOf="@+id/searchText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchbar2"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:numColumns="5"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/searchText2"
+                app:layout_constraintStart_toStartOf="@+id/searchText2"
+                app:layout_constraintTop_toBottomOf="@+id/searchText2">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
             <View
                 android:layout_width="350dp"
                 android:layout_height="1dp"
@@ -34,97 +66,17 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent" />
 
+
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/destination"
-                app:layout_constraintEnd_toStartOf="@+id/searchText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/startCons"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
-                android:padding="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchText">
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/white_calendar"
-                    app:layout_constraintEnd_toStartOf="@+id/textView6"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/startDateButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="6dp"
-                    android:paddingEnd="8dp"
-                    android:text="@string/lbl_date"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6"
-                    tools:ignore="RtlSymmetry" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/gidis_date"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView4"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/traveller_num"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-                app:layout_constraintStart_toEndOf="@+id/imageView12"
-                app:layout_constraintTop_toTopOf="@+id/imageView12"
-                tools:ignore="NotSibling" />
-
-            <EditText
-                android:id="@+id/personNum"
-                android:layout_width="39dp"
-                android:layout_height="22dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/searchbar_outline"
-                android:ems="10"
-                android:hint="@string/_1"
-                android:inputType="number"
-                android:textColorHint="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView9"
-                app:layout_constraintStart_toStartOf="@+id/imageView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/white_destination"
+                app:layout_constraintEnd_toStartOf="@+id/searchText"
+                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <TextView
                 android:id="@+id/SearchTourBtn"
@@ -144,7 +96,7 @@
                 android:id="@+id/searchText"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:background="@drawable/searchbar_outline"
                 android:hint="@string/lbl_where"
                 android:textAlignment="textStart"
@@ -155,19 +107,56 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
                 app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
+            <EditText
+                android:id="@+id/searchText2"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/searchbar_outline"
+                android:hint="Hangi Turu İstiyorsun?"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:iconifiedByDefault="false"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView19"
+                app:layout_constraintStart_toEndOf="@+id/imageView19"
+                app:layout_constraintTop_toTopOf="@+id/imageView19" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="188dp"
+                android:text="İster gideceğin ülkeye göre"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="130dp"
+                android:text="İster tur tipine göre seçim yap"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.139"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/imageView19"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="14dp"
-                android:src="@drawable/users"
-                app:layout_constraintEnd_toStartOf="@+id/textView9"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/startCons" />
-
-
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/white_hiking"
+                app:layout_constraintEnd_toStartOf="@+id/searchText2"
+                app:layout_constraintStart_toStartOf="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,5 +1,7 @@
 package com.example.bezalibrary.service.model
 
+import com.google.gson.annotations.SerializedName
+
 data class HotelElement(
     val id: Long,
     val name: String,
@@ -35,6 +37,9 @@ data class TourElement(
     val tourTypeName: String,
     val image: String
 )
+data class TourLocation(
+    val location: String
+    )
 
 data class FlightElement(
     val id: Long,
@@ -82,4 +87,16 @@ data class AirportElement(
 data class LocationElement(
     val id : Long,
     val name : String
+)
+data class TourTypeElement(
+    val id : Long,
+    val name : String
+)
+data class HotelReservationCheck(
+    @SerializedName("hotelReservationID") val hotelReservationID: Int,
+    @SerializedName("hotelRoomId") val hotelRoomId: Int,
+    @SerializedName("checkInDate") val checkInDate: String,
+    @SerializedName("checkOutDate") val checkOutDate: String,
+    @SerializedName("status") val status: String,
+    @SerializedName("totalPrice") val totalPrice: Double
 )

@@ -20,6 +20,12 @@ class HomeViewModel : ViewModel() {
     val featuredTours: LiveData<List<TourElement>?> get() = _featuredTours
     val featuredFlights: MutableLiveData<List<FlightElement>> get() = _featuredFlights
 
+    private val _isLoadingF = MutableLiveData<Boolean>()
+    val isLoadingF : LiveData<Boolean> get() = _isLoadingF
+    private val _isLoadingH = MutableLiveData<Boolean>()
+    val isLoadingH : LiveData<Boolean> get() = _isLoadingH
+    private val _isLoadingT = MutableLiveData<Boolean>()
+    val isLoadingT : LiveData<Boolean> get() = _isLoadingT
 
     init {
         fetchFeaturedFlights()
@@ -27,21 +33,30 @@ class HomeViewModel : ViewModel() {
         fetchFeaturedTours()
     }
 
-    fun fetchFeaturedFlights() {
+    private fun fetchFeaturedFlights() {
+        _isLoadingF.value = true
         functions.getFeaturedFlights().observeForever { flights ->
             _featuredFlights.value = flights
+            _isLoadingF.value = false
         }
     }
 
-    fun fetchFeaturedHotels() {
+    private fun fetchFeaturedHotels() {
+        _isLoadingH.value = true
+
         functions.getFeaturedHotels().observeForever { hotels ->
             _featuredHotels.value = hotels
+            _isLoadingH.value = false
+
         }
     }
 
-    fun fetchFeaturedTours() {
+    private fun fetchFeaturedTours() {
+        _isLoadingT.value = true
+
         functions.getFeaturedTours().observeForever { tours ->
             _featuredTours.value = tours
+            _isLoadingT.value = false
         }
     }
 }

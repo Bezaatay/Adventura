@@ -10,8 +10,8 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface AuthService {
-    @POST("api/SignIn/Login")
+    @POST("SignIn/Login")
     fun auth(@Body user: UserLogin): Call<UserLoginResponse>
-    @POST("api/Registers/CreateUser")
+    @POST("Registers/CreateUser")
     fun createUser(@Body user: NewUser): Call<RegisterResponse>
 }

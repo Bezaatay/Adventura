@@ -23,11 +23,13 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-
+        val appPref = AppPref(requireContext())
         val token = AppPref(requireContext()).getToken()
-        if(token!=null){
+        if (token != null) {
             binding.logBtn.visibility = View.INVISIBLE
         }
+        binding.fullNameTxt.text = appPref.getNameAndSurname()
+
         binding.logBtn.setOnClickListener {
             val intent = Intent(requireContext(), LogRegActivity::class.java)
             startActivity(intent)
@@ -40,6 +42,7 @@ class ProfileFragment : Fragment() {
 
         return binding.root
     }
+
     private fun showLogoutConfirmationDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Log Out")

@@ -32,14 +32,19 @@ class ResFlightViewModel : ViewModel() {
         }
     }
 
+    private val _isLoadingF = MutableLiveData<Boolean>()
+    val isLoadingF : LiveData<Boolean> get() = _isLoadingF
     init {
         fetchFeaturedFlights()
         fetchAirports()
     }
 
     private fun fetchFeaturedFlights() {
+        _isLoadingF.value = true
         functions.getFeaturedFlights().observeForever {
             _featuredFlights.value = it
+            _isLoadingF.value = false
+
         }
     }
 
@@ -50,6 +55,8 @@ class ResFlightViewModel : ViewModel() {
     }
 
     fun filterAirportNames(searchText: String) {
+        _isLoadingF.value = true
+
         functions.getAirport().observeForever { airports ->
             val filteredAirports = mutableListOf<AirportElement>()
 
@@ -59,6 +66,8 @@ class ResFlightViewModel : ViewModel() {
                 }
             }
             _airports.value = filteredAirports
+            _isLoadingF.value = false
+
         }
     }
 

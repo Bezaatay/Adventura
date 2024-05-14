@@ -12,6 +12,8 @@ class AppPref(context: Context) {
 
     companion object {
         private const val mail_KEY = "mail"
+        private const val name_KEY = "name"
+        private const val surname_KEY = "surname"
         private const val password_KEY = "password"
         private const val isChecked_KEY = "isChecked"
         private const val token_KEY = "token"
@@ -37,6 +39,18 @@ class AppPref(context: Context) {
             putString(token_KEY, token)
             apply()
         }
+    }
+    fun saveNameAndSurname(name: String,surname: String){
+        editor.apply {
+            putString(name_KEY,name)
+            putString(surname_KEY,surname)
+            apply()
+        }
+    }
+    fun getNameAndSurname(): String {
+        val n = sharedPreferences.getString(name_KEY, null)
+        val sn = sharedPreferences.getString(surname_KEY, null)
+        return n + sn
     }
 
     fun clearToken() {

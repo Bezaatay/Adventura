@@ -31,7 +31,6 @@ class HotelItemFragment : Fragment() {
             hotelId = hotel.id.toString()
             binding.hotelNameTxt.text = hotel.name
             binding.locationTxt.text = hotel.locationName
-            binding.currencyTxt.text = hotel.currencyName
             binding.priceTxt.text = "${hotel.price} ${hotel.currencyName}"
             binding.ratingBar.rating = hotel.stars.toFloat()
             Glide.with(requireContext())

@@ -9,11 +9,14 @@ import com.example.bezalibrary.service.repo.ServiceInterface
 import com.example.bezalibrary.service.model.BlogElement
 import com.example.bezalibrary.service.model.FlightElement
 import com.example.bezalibrary.service.model.HotelElement
+import com.example.bezalibrary.service.model.HotelReservationCheck
 import com.example.bezalibrary.service.model.HotelRoomElement
 import com.example.bezalibrary.service.model.LocationElement
 import com.example.reservationproject.model.NewUser
 import com.example.reservationproject.model.RegisterResponse
 import com.example.bezalibrary.service.model.TourElement
+import com.example.bezalibrary.service.model.TourLocation
+import com.example.bezalibrary.service.model.TourTypeElement
 import com.example.reservationproject.model.UserLogin
 import com.example.reservationproject.model.UserLoginResponse
 import retrofit2.Call
@@ -139,6 +142,7 @@ class Functions {
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
             }
         })
     }
@@ -309,11 +313,156 @@ class Functions {
                 val data = response.body()
                 if (data != null) {
                     liveData.value = data
-                    Log.e("data", data.toString())
                 }
             }
 
             override fun onFailure(call: Call<List<HotelElement>>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun checkReservation(roomId: Long, checkIn: String, checkOut: String): LiveData<Boolean> {
+        val liveData = MutableLiveData<Boolean>()
+
+        service.hotelReservationsCheck().enqueue(object : Callback<List<HotelReservationCheck>> {
+            override fun onResponse(
+                call: Call<List<HotelReservationCheck>>,
+                response: Response<List<HotelReservationCheck>>
+            ) {
+                if (response.isSuccessful) {
+                    val reservations = response.body()
+
+                    var isRoomAvailable = true
+
+                    reservations?.forEach { reservation ->
+                        if (reservation.hotelRoomId == roomId.toInt()) {
+                            val reservationCheckIn = reservation.checkInDate
+                            val reservationCheckOut = reservation.checkOutDate
+
+                            // Check for overlapping dates
+                            if (checkIn <= reservationCheckOut && checkOut >= reservationCheckIn) {
+                                isRoomAvailable = false
+                                return@forEach
+                            }
+                        }
+                    }
+                    liveData.postValue(isRoomAvailable)
+                } else {
+                    // API isteği başarısız olduğunda false değerini döndür
+                    liveData.postValue(false)
+                }
+            }
+
+            override fun onFailure(call: Call<List<HotelReservationCheck>>, t: Throwable) {
+                // Ağ hatası olduğunda false değerini döndür
+                liveData.postValue(false)
+            }
+        })
+        return liveData
+    }
+
+    fun getTourListByLocationName(locationName: String?): LiveData<List<TourElement>> {
+        val liveData = MutableLiveData<List<TourElement>>()
+
+        service.getTourList().enqueue(object : Callback<List<TourElement>> {
+            override fun onResponse(
+                call: Call<List<TourElement>>,
+                response: Response<List<TourElement>>
+            ) {
+                if (response.isSuccessful) {
+                    val tourList = mutableListOf<TourElement>()
+
+                    response.body()?.forEach { tourElement ->
+                        if (tourElement.location == locationName) {
+                            tourList.add(tourElement)
+                        }
+                    }
+                    liveData.value = tourList
+                } else {
+                    errorMessageLiveData.postValue("Response is not successful")
+                }
+            }
+
+            override fun onFailure(call: Call<List<TourElement>>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+
+    fun getTourLocations(): LiveData<List<TourLocation>> {
+        val liveData = MutableLiveData<List<TourLocation>>()
+
+        service.getTourLocation().enqueue(object : Callback<List<TourLocation>> {
+            override fun onResponse(
+                call: Call<List<TourLocation>>,
+                response: Response<List<TourLocation>>
+            ) {
+                if (response.isSuccessful) {
+                    val tourLocations: List<TourLocation>? = response.body()
+                    val filteredList =
+                        tourLocations?.distinctBy { it.location } // Tekrarlanan lokasyonları filtrele
+                    liveData.value = filteredList
+                } else {
+                    Log.e("alınamadı", "tourlocation alınamadı")
+                }
+            }
+
+            override fun onFailure(call: Call<List<TourLocation>>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun getTourById(tourId: Long): LiveData<TourElement> {
+        val liveData = MutableLiveData<TourElement>()
+
+        service.getTourById(tourId).enqueue(object : Callback<TourElement> {
+            override fun onResponse(call: Call<TourElement>, response: Response<TourElement>) {
+                liveData.value = response.body()
+            }
+
+            override fun onFailure(call: Call<TourElement>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun getTourTypes(): LiveData<List<TourTypeElement>> {
+        val liveData = MutableLiveData<List<TourTypeElement>>()
+
+        service.getTourType().enqueue(object : Callback<List<TourTypeElement>> {
+            override fun onResponse(
+                call: Call<List<TourTypeElement>>,
+                response: Response<List<TourTypeElement>>
+            ) {
+                liveData.value = response.body()
+            }
+
+            override fun onFailure(call: Call<List<TourTypeElement>>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun getTourByTourTypeId(long: Long): LiveData<List<TourElement>> {
+        val liveData = MutableLiveData<List<TourElement>>()
+
+        service.getToursByTourTypeId(long).enqueue(object : Callback<List<TourElement>> {
+            override fun onResponse(
+                call: Call<List<TourElement>>,
+                response: Response<List<TourElement>>
+            ) {
+                liveData.value = response.body()
+            }
+
+            override fun onFailure(call: Call<List<TourElement>>, t: Throwable) {
                 errorMessageLiveData.postValue(t.message.toString())
             }
         })
