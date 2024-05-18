@@ -2,6 +2,7 @@ package com.example.bezalibrary.service.repo
 
 import com.example.bezalibrary.service.model.AirportElement
 import com.example.bezalibrary.service.model.BlogElement
+import com.example.bezalibrary.service.model.Flight1Element
 import com.example.bezalibrary.service.model.FlightElement
 import com.example.bezalibrary.service.model.HotelElement
 import com.example.bezalibrary.service.model.HotelReservationCheck
@@ -42,9 +43,10 @@ interface ServiceInterface {
 
     @GET("FlightReserve/GetFlightsByAirport")
     fun searchFlightByAirportId(
-        @Query("airportid") id: Long,
-        @Query("LandingCity") landingCity: String
-    ): Call<List<FlightElement>>
+        @Query("airportid") airportId: Long,
+        @Query("available") available: Boolean,
+        @Query("landingcity") landingCity: String
+    ): Call<List<Flight1Element>>
 
     @GET("Locations/GetAllLocations")
     fun getLocation(): Call<List<LocationElement>>
@@ -68,5 +70,14 @@ interface ServiceInterface {
     fun getTourType(): Call<List<TourTypeElement>>
 
     @GET("FilterTours/GetToursByTourtype")
-    fun getToursByTourTypeId(@Query("tourTypeId") long: Long) : Call<List<TourElement>>
+    fun getToursByTourTypeId(@Query("tourTypeId") long: Long): Call<List<TourElement>>
+
+    @GET("Flights/FlightList")
+    fun getAllFlights(): Call<List<FlightElement>>
+
+    @GET("Flights/GetFlight/{id}")
+    fun getFlightById(@Path("id") flightId: Long): Call<FlightElement>
+
+    @GET("Hotels/GetHotel/{id}")
+    fun getHotelNameByHotelId(@Path("id") hotelId: Long?): Call<HotelElement>
 }

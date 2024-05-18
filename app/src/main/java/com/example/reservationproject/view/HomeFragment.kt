@@ -84,7 +84,7 @@ class HomeFragment : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
         }
         viewModel.featuredFlights.observe(viewLifecycleOwner) {
             it.let {
-                val adapter = it?.let { it1 -> FlightItemAdapter(requireContext(), it1, this,"HomeFragment") }
+                val adapter = it?.let { it1 -> FlightItemAdapter(requireContext(), it1, this) }
                 binding.popFlightRV.adapter = adapter
             }
         }

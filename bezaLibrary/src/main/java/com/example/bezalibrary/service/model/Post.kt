@@ -61,6 +61,26 @@ data class FlightElement(
     val departureCity: String,
     val landingCity: String
 )
+data class Flight1Element (
+    val flightId: Long,
+    val airlineID: Long,
+    val airlineName: String,
+    val airportID: Long,
+    val airportName: String,
+    val adultSeatPrice: Long,
+    val childPrice: Long,
+    val infantPrice: Long,
+    val duration: Long,
+    val departureTime: String,
+    val arrivalTime: String,
+    val baggage: Long,
+    val cabinBaggage: Long,
+    val flightTypeID: Long,
+    val flightTypeName: String,
+    val departureCity: String,
+    val landingCity: String,
+    val airlineImage: String
+)
 
 data class BlogElement (
     val id: Int,
@@ -77,8 +97,7 @@ data class HotelRoomElement (
     val roomNumber: String,
     val roomType: String,
     val roomImage: String,
-    val hotelID: Long,
-    val hotelName: String
+    val hotelID: Long
 )
 data class AirportElement(
     val id : Long,

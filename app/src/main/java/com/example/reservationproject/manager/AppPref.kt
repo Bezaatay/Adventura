@@ -25,6 +25,7 @@ class AppPref(context: Context) {
             apply()
         }
     }
+
     fun userData(username: String?, password: String, isChecked: Boolean) {
         editor.apply {
             putString(mail_KEY, username)
@@ -40,17 +41,35 @@ class AppPref(context: Context) {
             apply()
         }
     }
-    fun saveNameAndSurname(name: String,surname: String){
+  fun saveMail(mail: String) {
         editor.apply {
-            putString(name_KEY,name)
-            putString(surname_KEY,surname)
+            putString(mail_KEY, mail)
             apply()
         }
     }
+
+    fun saveNameAndSurname(name: String, surname: String) {
+        editor.apply {
+            putString(name_KEY, name)
+            putString(surname_KEY, surname)
+            apply()
+        }
+    }
+
     fun getNameAndSurname(): String {
         val n = sharedPreferences.getString(name_KEY, null)
         val sn = sharedPreferences.getString(surname_KEY, null)
-        return n + sn
+        return "$n $sn"
+    }
+
+    fun getName(): String? {
+        return sharedPreferences.getString(name_KEY, null)
+
+    }
+
+    fun getSurname(): String? {
+        return sharedPreferences.getString(surname_KEY, null)
+
     }
 
     fun clearToken() {

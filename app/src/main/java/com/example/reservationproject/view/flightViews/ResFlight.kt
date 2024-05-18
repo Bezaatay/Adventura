@@ -47,7 +47,7 @@ class ResFlight : Fragment(), FlightItemAdapter.OnFlightItemClickListener,
 
         viewModel.featuredFlights.observe(viewLifecycleOwner) {
             it?.let {
-                val adapter = FlightItemAdapter(requireContext(), it, this, "ResFlight")
+                val adapter = FlightItemAdapter(requireContext(), it, this)
                 binding.rv2.adapter = adapter
             }
         }

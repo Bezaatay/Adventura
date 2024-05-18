@@ -78,4 +78,13 @@
     <string name="sort">Sırala</string>
     <string name="tour_name">Tour Name</string>
     <string name="my_account">Hesabım</string>
+    <string name="departure">Kalkış</string>
+    <string name="arrival">Varış</string>
+    <string name="total_flight_time">Toplam Uçuş Süresi:</string>
+    <string name="total_price">Toplam Tutar</string>
+    <string name="flight_infos">Uçuş Bilgileri</string>
+    <string name="age">Yaş</string>
+    <string name="select_chair_no">Koltuk numarası seçiniz</string>
+    <string name="roomtype">room Type</string>
+    <string name="for_kids">Çocuk için;</string>
 </resources>

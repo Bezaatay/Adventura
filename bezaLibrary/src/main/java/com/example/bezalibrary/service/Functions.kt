@@ -7,6 +7,7 @@ import com.example.bezalibrary.service.model.AirportElement
 import com.example.bezalibrary.service.repo.AuthService
 import com.example.bezalibrary.service.repo.ServiceInterface
 import com.example.bezalibrary.service.model.BlogElement
+import com.example.bezalibrary.service.model.Flight1Element
 import com.example.bezalibrary.service.model.FlightElement
 import com.example.bezalibrary.service.model.HotelElement
 import com.example.bezalibrary.service.model.HotelReservationCheck
@@ -218,7 +219,6 @@ class Functions {
                 val responseBody = response.body()
                 if (responseBody != null) {
                     liveData.value = response.body()
-                    Log.e("DATA", response.body().toString())
                 } else {
                     Log.e("beyza", "response body is null")
                 }
@@ -257,22 +257,22 @@ class Functions {
     fun searchFlightByAirportId(
         airportId: Long,
         landingCity: String?
-    ): LiveData<List<FlightElement>> {
-        val liveData = MutableLiveData<List<FlightElement>>()
+    ): LiveData<List<Flight1Element>> {
+        val liveData = MutableLiveData<List<Flight1Element>>()
 
         if (landingCity != null) {
-            service.searchFlightByAirportId(airportId, landingCity)
-                .enqueue(object : Callback<List<FlightElement>> {
+            service.searchFlightByAirportId(airportId, true, landingCity)
+                .enqueue(object : Callback<List<Flight1Element>> {
                     override fun onResponse(
-                        call: Call<List<FlightElement>>,
-                        response: Response<List<FlightElement>>
+                        call: Call<List<Flight1Element>>,
+                        response: Response<List<Flight1Element>>
                     ) {
                         if (response.body() != null) {
                             liveData.value = response.body()
                         }
                     }
 
-                    override fun onFailure(call: Call<List<FlightElement>>, t: Throwable) {
+                    override fun onFailure(call: Call<List<Flight1Element>>, t: Throwable) {
                         errorMessageLiveData.postValue(t.message.toString())
                     }
                 })
@@ -468,4 +468,54 @@ class Functions {
         })
         return liveData
     }
+
+    fun getAllFlights(): LiveData<List<FlightElement>> {
+        val liveData = MutableLiveData<List<FlightElement>>()
+
+        service.getAllFlights().enqueue(object : Callback<List<FlightElement>> {
+            override fun onResponse(
+                call: Call<List<FlightElement>>,
+                response: Response<List<FlightElement>>
+            ) {
+                liveData.value = response.body()
+            }
+
+            override fun onFailure(call: Call<List<FlightElement>>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun getFlightByFlightId(flightId: Long): LiveData<FlightElement> {
+        val liveData = MutableLiveData<FlightElement>()
+
+        service.getFlightById(flightId).enqueue(object : Callback<FlightElement> {
+            override fun onResponse(call: Call<FlightElement>, response: Response<FlightElement>) {
+                liveData.value = response.body()
+            }
+
+            override fun onFailure(call: Call<FlightElement>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
+    fun getHotelNameByHotelId(hotelId: Long?): LiveData<String> {
+
+        val liveData = MutableLiveData<String>()
+        service.getHotelNameByHotelId(hotelId).enqueue(object : Callback<HotelElement> {
+            override fun onResponse(call: Call<HotelElement>, response: Response<HotelElement>) {
+                liveData.value = response.body()?.name
+                Log.e("hoteln",response.body()?.name.toString())
+            }
+
+            override fun onFailure(call: Call<HotelElement>, t: Throwable) {
+                errorMessageLiveData.postValue(t.message.toString())
+            }
+        })
+        return liveData
+    }
+
 }

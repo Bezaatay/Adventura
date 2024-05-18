@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bezalibrary.service.Functions
 import com.example.bezalibrary.service.model.FlightElement
@@ -34,7 +35,7 @@ class SeeAllFlightsFragment : Fragment() , FlightItemAdapter.OnFlightItemClickLi
 
         viewModel.featuredFlight.observe(viewLifecycleOwner) {
             it.let {
-                val adapter = it?.let { it1 -> FlightItemAdapter(requireContext(), it1, this, "HomeFragment") }
+                val adapter = it?.let { it1 -> FlightItemAdapter(requireContext(), it1, this) }
                 binding.rv.adapter = adapter
             }
         }
@@ -42,6 +43,8 @@ class SeeAllFlightsFragment : Fragment() , FlightItemAdapter.OnFlightItemClickLi
         return binding.root
     }
     override fun onFlightItemClick(position: Int, flightId: Long) {
-        Log.e("flightId",flightId.toString())
+        findNavController().navigate(R.id.action_seeAllFlightsFragment_to_flightItemFragment,Bundle().apply {
+            putLong("flightId",flightId)
+        })
     }
 }

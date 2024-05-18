@@ -124,19 +124,31 @@
         tools:layout="@layout/fragment_see_all_tours" />
     <fragment
         android:id="@+id/flightItemFragment"
-        android:name="com.example.reservationproject.view.flightViews.FlightItemFragment"
+        android:name="com.example.reservationproject.view.flightViews.FlightInfoItemFragment"
         android:label="fragment_flight_item"
-        tools:layout="@layout/fragment_flight_item" />
+        tools:layout="@layout/fragment_flight_item" >
+        <action
+            android:id="@+id/action_flightItemFragment_to_flightReservationFragment"
+            app:destination="@id/flightReservationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/seeAllFlightsFragment"
         android:name="com.example.reservationproject.view.flightViews.SeeAllFlightsFragment"
         android:label="fragment_see_all_flights"
-        tools:layout="@layout/fragment_see_all_flights" />
+        tools:layout="@layout/fragment_see_all_flights" >
+        <action
+            android:id="@+id/action_seeAllFlightsFragment_to_flightItemFragment"
+            app:destination="@id/flightItemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFlightFragment"
         android:name="com.example.reservationproject.view.flightViews.SearchFlightFragment"
         android:label="fragment_search_flight"
-        tools:layout="@layout/fragment_search_flight" />
+        tools:layout="@layout/fragment_search_flight" >
+        <action
+            android:id="@+id/action_searchFlightFragment_to_flightItemFragment"
+            app:destination="@id/flightItemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/roomItemFragment"
         android:name="com.example.reservationproject.view.hotelViews.RoomItemFragment"
@@ -160,4 +172,9 @@
             android:id="@+id/action_searchTourFragment_to_tourItemFragment"
             app:destination="@id/tourItemFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/flightReservationFragment"
+        android:name="com.example.reservationproject.view.flightViews.FlightReservationFragment"
+        android:label="fragment_flight_reservation"
+        tools:layout="@layout/fragment_flight_reservation" />
 </navigation>

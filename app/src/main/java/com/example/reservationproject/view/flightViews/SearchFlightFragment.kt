@@ -9,8 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.reservationproject.R
 import com.example.reservationproject.adapter.FlightItem1Adapter
 import com.example.reservationproject.databinding.FragmentSearchFlightBinding
 import com.example.reservationproject.utils.DateFunctions.convertStringToDate
@@ -45,7 +48,6 @@ class SearchFlightFragment : Fragment(), FlightItem1Adapter.OnFlight1ItemClickLi
         val date = requireArguments().getString("date")
 
         if (date != null) {
-            Log.e("date", date)
             selectedDate = convertStringToDate(date)
             viewModel.fetchFlightsByAirportId(airportId, landingCity, date)
         } else {
@@ -68,6 +70,9 @@ class SearchFlightFragment : Fragment(), FlightItem1Adapter.OnFlight1ItemClickLi
                 binding.cannotFindTxt.visibility = View.INVISIBLE
             }
         }
+        viewModel.progressBar.observe(viewLifecycleOwner){
+            binding.progressBar.isVisible = it
+        }
         binding.nextDayCons.setOnClickListener {
             val nextDay = increaseDateByOneDay(selectedDate!!)
             binding.dateTxt.text = formatDateToMountAndDay(nextDay)
@@ -77,6 +82,7 @@ class SearchFlightFragment : Fragment(), FlightItem1Adapter.OnFlight1ItemClickLi
                 landingCity,
                 formatDateToString(selectedDate!!)
             )
+            Log.e("selected date",formatDateToString(selectedDate!!).toString())
         }
         binding.previousDayCons.setOnClickListener {
             val previousDay = decreaseDateByOneDay(selectedDate!!)
@@ -95,7 +101,9 @@ class SearchFlightFragment : Fragment(), FlightItem1Adapter.OnFlight1ItemClickLi
         return binding.root
     }
 
-    override fun onFlight1ItemClick(position: Int, flightIdd: Long) {
-        Log.e("item id", flightIdd.toString())
+    override fun onFlight1ItemClick(position: Int, flightId: Long) {
+        findNavController().navigate(R.id.action_searchFlightFragment_to_flightItemFragment, Bundle().apply {
+            putLong("flightId",flightId)
+        })
     }
 }

@@ -122,6 +122,7 @@ class RegisterFragment : Fragment() {
                         binding.nameTxt.text.toString(),
                         binding.surnameTxt.text.toString()
                     )
+                    appPref.saveMail(binding.mailTxt.text.toString())
                     showCreatedUserDialog()
                 }
 

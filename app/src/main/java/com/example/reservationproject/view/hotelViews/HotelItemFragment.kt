@@ -1,7 +1,6 @@
 package com.example.reservationproject.view.hotelViews
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +30,7 @@ class HotelItemFragment : Fragment() {
             hotelId = hotel.id.toString()
             binding.hotelNameTxt.text = hotel.name
             binding.locationTxt.text = hotel.locationName
+            binding.textView17.text = hotel.description
             binding.priceTxt.text = "${hotel.price} ${hotel.currencyName}"
             binding.ratingBar.rating = hotel.stars.toFloat()
             Glide.with(requireContext())
@@ -39,9 +39,16 @@ class HotelItemFragment : Fragment() {
         }
 
         binding.findRoomBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_itemFragment_to_hotelRoomFragment, Bundle().apply {
-                hotelId?.let { it1 -> putLong("itemId", it1.toLong()) }
-            })}
+            findNavController().navigate(
+                R.id.action_itemFragment_to_hotelRoomFragment,
+                Bundle().apply {
+                    hotelId?.let { it1 -> putLong("itemId", it1.toLong()) }
+                })
+        }
+
+        binding.backPage.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
         return binding.root
     }
 }

@@ -1,27 +1,40 @@
 package com.example.reservationproject.view.tourViews
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.reservationproject.databinding.FragmentTourItemBinding
+import com.example.reservationproject.manager.AppPref
+import com.example.reservationproject.view.LogRegActivity
 import com.example.reservationproject.viewmodel.TourItemViewModel
 
 class TourItemFragment : Fragment() {
 
 private lateinit var binding : FragmentTourItemBinding
 private val viewModel : TourItemViewModel by viewModels()
+    private var priceAdult: Int = 0
+    private var priceChild: Int = 0
+    private var totalPrice: Int = 0
+    private lateinit var currency: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTourItemBinding.inflate(inflater, container, false)
-
+        val token = AppPref(requireContext()).getToken()
         viewModel.getTourById(requireArguments().getLong("tourId"))
         viewModel.tour.observe(viewLifecycleOwner){
+            priceAdult = it.tourAdultPrice.toInt()
+            priceChild = it.tourChildPrice.toInt()
+            currency = it.currencyName
+            viewModel.setPrices(priceAdult, priceChild)
             binding.tourNameTxt.text = it.name
             binding.locationTxt.text = it.location
             binding.descriptionTxt.text = it.description
@@ -32,6 +45,59 @@ private val viewModel : TourItemViewModel by viewModels()
                 .load(it.image)
                 .into(binding.photoImgView)
         }
+
+        binding.add.setOnClickListener {
+            viewModel.incrementAdultCount()
+        }
+
+        binding.minus.setOnClickListener {
+            viewModel.decrementAdultCount()
+        }
+
+        binding.addChild.setOnClickListener {
+            viewModel.incrementChildCount()
+        }
+
+        binding.minusChild.setOnClickListener {
+            viewModel.decrementChildCount()
+        }
+
+        viewModel.adultCount.observe(viewLifecycleOwner) {
+            binding.personNum.text = it.toString()
+        }
+
+        viewModel.childCount.observe(viewLifecycleOwner) {
+            binding.childNum.text = it.toString()
+        }
+
+        viewModel.totalAmount.observe(viewLifecycleOwner) {
+            binding.findRoomBtn.text = "Rezervasyon Yap"+"("+it.toString()+currency+"TL)"
+        }
+
+        binding.findRoomBtn.setOnClickListener {
+            if(token==null){
+                showLoginConfirmationDialog()
+            }
+            else{
+
+            }
+        }
+
         return binding.root
+    }
+    private fun showLoginConfirmationDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Kulllanıcı Bilgisi Boş")
+        builder.setMessage("Rezervasyon yapabilmek için kullanıcı girişi yapmanız gerekmektedir.")
+
+        builder.setPositiveButton("Giriş Yap") { dialog, _ ->
+            val intent = Intent(requireActivity(), LogRegActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 }

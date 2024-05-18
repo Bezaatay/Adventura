@@ -21,9 +21,20 @@ class RoomItemViewModel : ViewModel() {
 
     private val  _isRoomAvailable = MutableLiveData<Boolean>()
     val  isRoomAvailable :MutableLiveData<Boolean> get() = _isRoomAvailable
+    private val  _isTotalPrice = MutableLiveData<Boolean>()
+    val  isTotalPrice :MutableLiveData<Boolean> get() = _isTotalPrice
+
+    private val _hotelName = MutableLiveData<String>()
+    val hotelName: MutableLiveData<String> get() = _hotelName
     fun fetchRoomById(long: Long) {
         functions.getRoomById(long).observeForever {
             room.value= it
+        }
+    }
+
+    fun getHotelNameByHotelId(hotelId: Long?) {
+        functions.getHotelNameByHotelId(hotelId).observeForever {
+            _hotelName.value = it
         }
     }
     val startDate: MutableLiveData<String> by lazy {
@@ -55,6 +66,7 @@ class RoomItemViewModel : ViewModel() {
             set(Calendar.DAY_OF_MONTH, dayOfMonth)
         }
         endDate.value = formatDate(calendar)
+        _isTotalPrice.value = true
     }
 
     private fun formatDate(calendar: Calendar): String {
@@ -81,15 +93,5 @@ class RoomItemViewModel : ViewModel() {
             e.printStackTrace()
             ""
         }
-    }
-    fun findDaysBetweenDates(checkIn: String, checkOut: String): Int {
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-
-        val checkInDate = dateFormat.parse(checkIn)
-        val checkOutDate = dateFormat.parse(checkOut)
-
-        val difference = checkOutDate.time - checkInDate.time
-
-        return (difference / (1000 * 60 * 60 * 24)).toInt()
     }
 }

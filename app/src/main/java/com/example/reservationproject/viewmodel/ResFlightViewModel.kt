@@ -41,7 +41,7 @@ class ResFlightViewModel : ViewModel() {
 
     private fun fetchFeaturedFlights() {
         _isLoadingF.value = true
-        functions.getFeaturedFlights().observeForever {
+        functions.getAllFlights().observeForever {
             _featuredFlights.value = it
             _isLoadingF.value = false
 

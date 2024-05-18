@@ -48,6 +48,7 @@ class HotelRoomFragment : Fragment(), HotelRoomAdapter.OnHotelRoomItemClickListe
             R.id.action_hotelRoomFragment_to_roomItemFragment,
             Bundle().apply {
                 putLong("roomId", roomId)
+                putLong("hotelId",requireArguments().getLong("itemId"))
             })
     }
 }

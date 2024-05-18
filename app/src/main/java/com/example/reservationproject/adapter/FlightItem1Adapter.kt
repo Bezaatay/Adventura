@@ -7,17 +7,20 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.bezalibrary.service.model.Flight1Element
 import com.example.bezalibrary.service.model.FlightElement
 import com.example.reservationproject.R
+import com.example.reservationproject.utils.DateFunctions.convertDateTimeToHourAndMinute
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class FlightItem1Adapter(
     private val context: Context,
-    private var item: List<FlightElement>,
+    private var item: List<Flight1Element>,
     private var listener: OnFlight1ItemClickListener
 ) : RecyclerView.Adapter<FlightItem1Adapter.ItemViewHolder>() {
 
@@ -27,7 +30,6 @@ class FlightItem1Adapter(
         val airlinePhoto: ImageView = itemView.findViewById(R.id.airlinePhoto)
         val airlineNameTxt: TextView = itemView.findViewById(R.id.airlineNameTxt)
         val priceTxt: TextView = itemView.findViewById(R.id.priceTxt)
-        val flightIdd: TextView = itemView.findViewById(R.id.flightId)
         val duration: TextView = itemView.findViewById(R.id.durationTxt)
         val departureTimeTxt: TextView = itemView.findViewById(R.id.departureTimeTxt)
         val arrivalTimeTxt: TextView = itemView.findViewById(R.id.arrivalTimeTxt)
@@ -39,12 +41,11 @@ class FlightItem1Adapter(
         override fun onClick(view: View) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                val flightId = item[position].id // Item'in ID'sini al
-                listener.onFlight1ItemClick(position, flightId) // ID'yi listener'a gönder
+                val flightId = item[position].flightId
+                listener.onFlight1ItemClick(position, flightId)
             }
         }
     }
-
     interface OnFlight1ItemClickListener {
         fun onFlight1ItemClick(position: Int, flightId: Long)
     }
@@ -60,7 +61,6 @@ class FlightItem1Adapter(
         Glide.with(context).load(item[position].airlineImage).into(holder.airlinePhoto)
         holder.airlineNameTxt.text = item[position].airlineName
         holder.priceTxt.text = item[position].adultSeatPrice.toString()
-        holder.flightIdd.text = item[position].id.toString()
         holder.duration.text = item[position].duration.toString() + " Saat"
         holder.arrivalTimeTxt.text =convertDateTimeToHourAndMinute(item[position].arrivalTime)
         holder.departureTimeTxt.text =convertDateTimeToHourAndMinute(item[position].departureTime)
@@ -70,16 +70,5 @@ class FlightItem1Adapter(
         return item.size
     }
 
-    private fun convertDateTimeToHourAndMinute(dateTime: String): String {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-        val outputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
-        return try {
-            val date = inputFormat.parse(dateTime)
-            outputFormat.format(date)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            ""
-        }
-    }
 }

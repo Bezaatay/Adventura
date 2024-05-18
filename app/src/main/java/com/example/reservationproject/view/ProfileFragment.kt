@@ -28,6 +28,10 @@ class ProfileFragment : Fragment() {
         if (token != null) {
             binding.logBtn.visibility = View.INVISIBLE
         }
+        if (token == null) {
+            binding.fullNameTxt.text = "Misafir Kullanıcı"
+            binding.textView11.visibility = View.INVISIBLE
+        }
         binding.fullNameTxt.text = appPref.getNameAndSurname()
 
         binding.logBtn.setOnClickListener {
