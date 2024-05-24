@@ -1,10 +1,6 @@
-# Welfare - Dont waste it, share it.</p>
+# Multiple Reservation Android Mobile Application.</p>
 
-  <img src="https://github.com/Bezaatay/Adventura/assets/133115182/bba09294-80f2-4fcb-b877-70c18425ac72
-" alt="logo design">
-
-
-
+  <img src="https://github.com/Bezaatay/Adventura/assets/133115182/bba09294-80f2-4fcb-b877-70c18425ac72" alt="logo design">
 
 ## Overview
 
@@ -13,7 +9,7 @@ Adventura is a mobile application designed to make life easier for travel enthus
 
 
 <p align="center">
-  <img src="https://github.com/Bezaatay/Adventura/assets/133115182/236389fc-db5f-44ba-9902-2cc42accdd57" alt="Adventura">
+  <img width="400" src="https://github.com/Bezaatay/Adventura/assets/133115182/236389fc-db5f-44ba-9902-2cc42accdd57" alt="Adventura">
 </p>
 
 
@@ -72,7 +68,6 @@ Adventura is a mobile application designed to make life easier for travel enthus
 ## Reservation For Tour
 
 <div style="display: flex; flex-wrap: wrap;">
-  
       <img width="200" alt="restour1" src="https://github.com/Bezaatay/Adventura/assets/133115182/0cc1c417-a06a-444b-996e-6cd4a9e1afed">
       <img width="200" alt="restour2" src="https://github.com/Bezaatay/Adventura/assets/133115182/519b8355-7653-4b6e-baf4-ce70fa3f487c">
       <img width="200" alt="restour3" src="https://github.com/Bezaatay/Adventura/assets/133115182/0b044445-599c-4d65-ad8c-8b82890201b8">
@@ -94,9 +89,7 @@ Adventura is a mobile application designed to make life easier for travel enthus
 
 <div style="display: flex; flex-wrap: wrap;">
         <img width="200" alt="reshotel1" src="https://github.com/Bezaatay/Adventura/assets/133115182/f24e8d22-86f9-404f-8f6e-fcb201475aae">
-      <img width="200" alt="reshotel2" src="https://github.com/Bezaatay/Adventura/assets/133115182/519b8355-7653-4b6e-baf4-ce70fa3f487c">
-      <img width="200" alt="reshotel3" src="https://github.com/Bezaatay/Adventura/assets/133115182/0b044445-599c-4d65-ad8c-8b82890201b8">
-      <img width="205" alt="reshotel4" src="https://github.com/Bezaatay/Adventura/assets/133115182/872f979c-15c0-4f02-8365-cfc37dc28700">
+      <img width="200" alt="reshotel2" src="https://github.com/Bezaatay/Adventura/assets/133115182/9eda581d-c250-4bc9-8462-3cec7aadf58d">
 </div>
 
 
