@@ -1,7 +1,7 @@
 # Welfare - Dont waste it, share it.</p>
 
-  <img src="![image](https://github.com/Bezaatay/Adventura/assets/133115182/bba09294-80f2-4fcb-b877-70c18425ac72)
-" alt="SC logo design">
+  <img src="https://github.com/Bezaatay/Adventura/assets/133115182/bba09294-80f2-4fcb-b877-70c18425ac72
+" alt="logo design">
 
 
 
@@ -72,7 +72,8 @@ Adventura is a mobile application designed to make life easier for travel enthus
 ## Reservation For Tour
 
 <div style="display: flex; flex-wrap: wrap;">
-      <img width="200" alt="https://github.com/Bezaatay/Adventura/assets/133115182/cec3f6a4-80e3-4483-b5a5-5a8edbae290f">
+  
+      <img width="200" alt="restour1" src="https://github.com/Bezaatay/Adventura/assets/133115182/0cc1c417-a06a-444b-996e-6cd4a9e1afed">
       <img width="200" alt="restour2" src="https://github.com/Bezaatay/Adventura/assets/133115182/519b8355-7653-4b6e-baf4-ce70fa3f487c">
       <img width="200" alt="restour3" src="https://github.com/Bezaatay/Adventura/assets/133115182/0b044445-599c-4d65-ad8c-8b82890201b8">
       <img width="205" alt="restour4" src="https://github.com/Bezaatay/Adventura/assets/133115182/872f979c-15c0-4f02-8365-cfc37dc28700">
@@ -92,58 +93,47 @@ Adventura is a mobile application designed to make life easier for travel enthus
 ## Reservation For Hotel
 
 <div style="display: flex; flex-wrap: wrap;">
-      <img width="200" alt="https://github.com/Bezaatay/Adventura/assets/133115182/83247943-d6b0-4dc9-b56b-9748ab7419b9">
-      <img width="200" alt="restour2" src="https://github.com/Bezaatay/Adventura/assets/133115182/519b8355-7653-4b6e-baf4-ce70fa3f487c">
-      <img width="200" alt="restour3" src="https://github.com/Bezaatay/Adventura/assets/133115182/0b044445-599c-4d65-ad8c-8b82890201b8">
-      <img width="205" alt="restour4" src="https://github.com/Bezaatay/Adventura/assets/133115182/872f979c-15c0-4f02-8365-cfc37dc28700">
+        <img width="200" alt="reshotel1" src="https://github.com/Bezaatay/Adventura/assets/133115182/f24e8d22-86f9-404f-8f6e-fcb201475aae">
+      <img width="200" alt="reshotel2" src="https://github.com/Bezaatay/Adventura/assets/133115182/519b8355-7653-4b6e-baf4-ce70fa3f487c">
+      <img width="200" alt="reshotel3" src="https://github.com/Bezaatay/Adventura/assets/133115182/0b044445-599c-4d65-ad8c-8b82890201b8">
+      <img width="205" alt="reshotel4" src="https://github.com/Bezaatay/Adventura/assets/133115182/872f979c-15c0-4f02-8365-cfc37dc28700">
 </div>
 
 
 ## Permissions
 
 ```xml
-<uses-permission android:name="android.permission.INTERNET" /> 
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> 
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
 ```
   
 ## Dependencies
 
 ```kotlin
+
 dependencies {
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.android.gms:play-services-location:21.1.0")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    val nav_version = "2.7.6"
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
     val  room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
     implementation ("androidx.room:room-ktx:$room_version")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("com.intuit.sdp:sdp-android:1.0.6")
-    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.17")
-    implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.google.android.gms:play-services-location:18.0.0")
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation(project(":bezaLibrary"))
 }
 ```
 
