@@ -1,13 +1,12 @@
 package com.example.bezalibrary.service.repo
 
-import com.example.reservationproject.model.NewUser
-import com.example.reservationproject.model.RegisterResponse
-import com.example.reservationproject.model.UserLogin
-import com.example.reservationproject.model.UserLoginResponse
+import com.example.bezalibrary.service.model.NewUser
+import com.example.bezalibrary.service.model.RegisterResponse
+import com.example.bezalibrary.service.model.UserLogin
+import com.example.bezalibrary.service.model.UserLoginResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
-import retrofit2.http.Path
 
 interface AuthService {
     @POST("SignIn/Login")

@@ -1,12 +1,8 @@
 package com.example.reservationproject.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.reservationproject.model.NewUser
-import com.example.reservationproject.model.RegisterResponse
-import com.example.bezalibrary.service.repo.AuthService
 
 class RegisterViewModel : ViewModel() {
 

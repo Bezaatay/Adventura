@@ -21,6 +21,8 @@
                 android:id="@+id/photoImgView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -29,6 +31,29 @@
                 app:layout_constraintVertical_bias="0.5"
                 tools:srcCompat="@tools:sample/avatars" />
 
+
+            <View
+                android:id="@+id/backgroundView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:alpha="0.7"
+                android:background="@color/more_light_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/locationTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/marker" />
 
             <TextView
                 android:id="@+id/tourTypeName"
@@ -42,17 +67,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/backgroundView" />
 
-            <View
-                android:id="@+id/backgroundView"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:alpha="0.2"
-                android:background="@color/more_light_grey"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
-
             <TextView
                 android:id="@+id/tourNameTxt"
                 android:layout_width="wrap_content"
@@ -65,18 +79,6 @@
                 app:layout_constraintHorizontal_bias="0.051"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tourTypeName" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/locationTxt"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/marker" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -107,25 +109,21 @@
                 android:id="@+id/currencyTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="324dp"
                 android:text="@string/currency_type"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/photoImgView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.911" />
+                app:layout_constraintBottom_toBottomOf="@+id/priceTxt"
+                app:layout_constraintStart_toEndOf="@+id/priceTxt"
+                app:layout_constraintTop_toTopOf="@+id/priceTxt" />
 
             <TextView
                 android:id="@+id/priceTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="320dp"
                 android:text="@string/prize"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/currencyTxt"
+                app:layout_constraintStart_toStartOf="@+id/photoImgView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.911" />
 

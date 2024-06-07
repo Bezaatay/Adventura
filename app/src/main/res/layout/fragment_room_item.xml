@@ -26,7 +26,7 @@
         android:id="@+id/constraintLayout15"
         android:layout_width="380dp"
         android:layout_height="500dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corner_with_white_bcg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

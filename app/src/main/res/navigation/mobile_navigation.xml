@@ -40,7 +40,11 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.reservationproject.view.ProfileFragment"
         android:label="profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/resFlight"
         android:name="com.example.reservationproject.view.flightViews.ResFlight"
@@ -102,7 +106,11 @@
         android:id="@+id/navigation_blog"
         android:name="com.example.reservationproject.view.BlogFragment"
         android:label="fragment_blog"
-        tools:layout="@layout/fragment_blog" />
+        tools:layout="@layout/fragment_blog" >
+        <action
+            android:id="@+id/action_navigation_blog_to_blogItemFragment"
+            app:destination="@id/blogItemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/hotelRoomFragment"
         android:name="com.example.reservationproject.view.hotelViews.HotelRoomFragment"
@@ -116,12 +124,20 @@
         android:id="@+id/tourItemFragment"
         android:name="com.example.reservationproject.view.tourViews.TourItemFragment"
         android:label="fragment_tour_item"
-        tools:layout="@layout/fragment_tour_item" />
+        tools:layout="@layout/fragment_tour_item" >
+        <action
+            android:id="@+id/action_tourItemFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/seeAllToursFragment"
         android:name="com.example.reservationproject.view.tourViews.SeeAllToursFragment"
         android:label="fragment_see_all_tours"
-        tools:layout="@layout/fragment_see_all_tours" />
+        tools:layout="@layout/fragment_see_all_tours" >
+        <action
+            android:id="@+id/action_seeAllToursFragment_to_tourItemFragment"
+            app:destination="@id/tourItemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/flightItemFragment"
         android:name="com.example.reservationproject.view.flightViews.FlightInfoItemFragment"
@@ -153,7 +169,11 @@
         android:id="@+id/roomItemFragment"
         android:name="com.example.reservationproject.view.hotelViews.RoomItemFragment"
         android:label="fragment_room_item"
-        tools:layout="@layout/fragment_room_item" />
+        tools:layout="@layout/fragment_room_item" >
+        <action
+            android:id="@+id/action_roomItemFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchHotelFragment"
         android:name="com.example.reservationproject.view.hotelViews.SearchHotelFragment"
@@ -176,5 +196,19 @@
         android:id="@+id/flightReservationFragment"
         android:name="com.example.reservationproject.view.flightViews.FlightReservationFragment"
         android:label="fragment_flight_reservation"
-        tools:layout="@layout/fragment_flight_reservation" />
+        tools:layout="@layout/fragment_flight_reservation" >
+        <action
+            android:id="@+id/action_flightReservationFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.reservationproject.view.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/blogItemFragment"
+        android:name="com.example.reservationproject.view.BlogItemFragment"
+        android:label="fragment_blog_item"
+        tools:layout="@layout/fragment_blog_item" />
 </navigation>

@@ -35,6 +35,10 @@ class SearchTourFragment : Fragment(), TourItemAdapter.OnTourItemClickListener {
             viewModel.getToursByTourId(tourTypeId)
         }
 
+        binding.imageView14.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
         viewModel.tours.observe(viewLifecycleOwner) {
             it?.let {
                 val adapter = TourItemAdapter(requireContext(), it, this)

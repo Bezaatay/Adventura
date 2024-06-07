@@ -32,13 +32,16 @@ class BlogAdapter(
         override fun onClick(p0: View?) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onBlogItemClick(position)
+                val blogDesc = item[position].desc
+                val blogImage = item[position].image
+                val blogTitle = item[position].title
+                listener.onBlogItemClick(position,blogTitle,blogImage,blogDesc)
             }
         }
     }
 
     interface OnBlogItemClickListener {
-        fun onBlogItemClick(position: Int)
+        fun onBlogItemClick(position: Int, blogTitle: String, blogImage: String, blogDesc: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
@@ -51,7 +54,9 @@ class BlogAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         Glide.with(context).load(item[position].image).into(holder.imagePhoto)
         holder.location.text = item[position].title
-        holder.descriptionTxt.text = item[position].desc
+        val desc = item[position].desc
+        val truncatedDesc = if (desc.length > 200) desc.substring(0, 200).substringBeforeLast(" ") + "..." else desc
+        holder.descriptionTxt.text = truncatedDesc
     }
 
     override fun getItemCount(): Int {

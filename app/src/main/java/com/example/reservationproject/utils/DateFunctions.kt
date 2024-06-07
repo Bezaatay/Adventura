@@ -114,4 +114,17 @@ object DateFunctions {
             0
         }
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun convertDateToISOFormat(dateString: String): String {
+        // Giriş formatını tanımla
+        val inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        // Çıkış formatını tanımla
+        val outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+        // String'i LocalDate'e dönüştür
+        val date = LocalDate.parse(dateString, inputFormatter)
+
+        // LocalDate'i istenilen formata çevir ve döndür
+        return date.format(outputFormatter)
+    }
 }

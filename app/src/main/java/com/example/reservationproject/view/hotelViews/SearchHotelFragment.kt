@@ -34,6 +34,10 @@ class SearchHotelFragment : Fragment() , HotelItemAdapter.OnHotelItemClickListen
             binding.rv.adapter = adapter
         }
 
+        binding.imageView14.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
         return binding.root
     }
 

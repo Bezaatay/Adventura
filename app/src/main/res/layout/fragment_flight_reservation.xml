@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint"
     android:layout_width="match_parent"
     android:layout_height="@dimen/page_dp"
     android:background="@color/page_background"
@@ -19,8 +20,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout12"
         android:layout_width="330dp"
-        android:layout_height="540dp"
+        android:layout_height="480dp"
         android:layout_marginTop="70dp"
         android:background="@drawable/rounded_corner_with_white_bcg"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +82,7 @@
             android:background="@drawable/rounded_corner_with_white_bcg"
             android:ems="10"
             android:hint="@string/age"
-            android:inputType="text"
+            android:inputType="number"
             android:padding="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.533"
@@ -95,43 +97,62 @@
             android:background="@drawable/rounded_corner_with_white_bcg"
             android:ems="10"
             android:hint="(5XX)XXXXXXX"
-            android:inputType="text"
+            android:inputType="number"
             android:padding="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ageTxt" />
-
-        <EditText
-            android:id="@+id/seatTxt"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_corner_with_white_bcg"
-            android:ems="10"
-            android:hint="@string/select_chair_no"
-            android:inputType="text"
-            android:padding="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phoneTxt" />
+            app:layout_constraintTop_toBottomOf="@+id/ageTxt"
+            tools:ignore="TextFields" />
 
         <TextView
             android:id="@+id/payBtn"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/blue_to_white_background_with_radius"
             android:gravity="center"
             android:padding="5dp"
             android:text="Öde"
             android:textColor="@color/white"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Check in için görevliye danışınız."
+            app:layout_constraintBottom_toBottomOf="@+id/showSeatsImg"
+            app:layout_constraintStart_toEndOf="@+id/showSeatsImg"
+            app:layout_constraintTop_toTopOf="@+id/showSeatsImg" />
+
+        <ImageView
+            android:id="@+id/showSeatsImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@android:drawable/ic_menu_info_details"
+            app:layout_constraintBottom_toTopOf="@+id/payBtn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seatTxt" />
+            app:layout_constraintTop_toBottomOf="@+id/phoneTxt"
+            app:layout_constraintVertical_bias="0.105" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/seatImg"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="36dp"
+        android:src="@drawable/seat_map"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,15 +4,27 @@ import com.example.bezalibrary.service.model.AirportElement
 import com.example.bezalibrary.service.model.BlogElement
 import com.example.bezalibrary.service.model.Flight1Element
 import com.example.bezalibrary.service.model.FlightElement
+import com.example.bezalibrary.service.model.FlightRes
+import com.example.bezalibrary.service.model.FlightTicket
 import com.example.bezalibrary.service.model.HotelElement
+import com.example.bezalibrary.service.model.HotelRes
 import com.example.bezalibrary.service.model.HotelReservationCheck
 import com.example.bezalibrary.service.model.HotelRoomElement
+import com.example.bezalibrary.service.model.HotelTicket
 import com.example.bezalibrary.service.model.LocationElement
+import com.example.bezalibrary.service.model.Payment
 import com.example.bezalibrary.service.model.TourElement
 import com.example.bezalibrary.service.model.TourLocation
 import com.example.bezalibrary.service.model.TourTypeElement
+import com.example.bezalibrary.service.model.RegisterResponse
+import com.example.bezalibrary.service.model.ResResponse
+import com.example.bezalibrary.service.model.TourRes
+import com.example.bezalibrary.service.model.TourTicket
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -80,4 +92,32 @@ interface ServiceInterface {
 
     @GET("Hotels/GetHotel/{id}")
     fun getHotelNameByHotelId(@Path("id") hotelId: Long?): Call<HotelElement>
+
+    @POST("FlightReservations/CreateFlightReservation")
+    fun createFlightReservation(@Body flightRes: FlightRes): Call<ResResponse>
+
+    @POST("HotelReservation/CreateHotelReservation")
+    fun createRoomReservation(@Body newHotelRoomRes: HotelRes): Call<ResResponse>
+
+    @POST("TourReservation/CreateTourReservation")
+    fun createTourReservation(@Body newTourRes: TourRes): Call<ResResponse>
+
+    @GET("FlightReservations/GetMyFlightReservations")
+    fun getMyFlightReservations(): Call<List<FlightTicket>>
+
+    @GET("HotelReservation/GetMyReservations")
+    fun getMyHotelReservations(): Call<List<HotelTicket>>
+
+    @GET("TourReservation/GetMyTourReservations")
+    fun getMyTourReservations(): Call<List<TourTicket>>
+
+    @POST("Payment/Checkout")
+    fun getPaymentUrl(): Call<Payment>
+
+    @POST("Payment/HotelCheckout")
+    fun getPaymentHotelUrl(): Call<Payment>
+
+    @POST("Payment/TourCheckout")
+    fun getPaymentTourUrl(): Call<Payment>
+
 }

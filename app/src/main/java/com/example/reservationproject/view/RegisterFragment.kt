@@ -1,6 +1,5 @@
 package com.example.reservationproject.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -20,7 +19,7 @@ import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.R
 import com.example.reservationproject.databinding.FragmentRegisterBinding
 import com.example.reservationproject.manager.AppPref
-import com.example.reservationproject.model.NewUser
+import com.example.bezalibrary.service.model.NewUser
 import com.example.reservationproject.viewmodel.RegisterViewModel
 import java.util.regex.Pattern
 
@@ -224,7 +223,7 @@ class RegisterFragment : Fragment() {
         builder.setTitle("Log Out")
         builder.setMessage("Kullanıcı Oluşturuldu")
 
-        builder.setPositiveButton("Tamam") { dialog, which ->
+        builder.setPositiveButton("Tamam") { _, _ ->
 
             val transition = RegisterFragmentDirections.regToLog(
                 username = binding.usernameTxt.text.toString(),

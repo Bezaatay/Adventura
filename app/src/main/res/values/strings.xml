@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Finder</string>
+    <string name="app_name">Adventura</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lbl_mail">E-mail</string>
@@ -87,4 +87,14 @@
     <string name="select_chair_no">Koltuk numarası seçiniz</string>
     <string name="roomtype">room Type</string>
     <string name="for_kids">Çocuk için;</string>
+    <string name="my_tickets">Biletlerim</string>
+    <string name="hotel">Otel</string>
+    <string name="chair_no">Koltuk Numarası:</string>
+    <string name="room_num">Oda Numarası</string>
+    <string name="total_ticket_num">Toplam Bilet Sayısı:</string>
+    <string name="no">NO</string>
+    <string name="my_reservations">Rezervasyonlarım</string>
+    <string name="my_tour_tickets">Tur Biletlerim</string>
+    <string name="return_app">Uygulamaya Dön</string>
+    <string name="return_homepage">Anasayfaya Dön</string>
 </resources>

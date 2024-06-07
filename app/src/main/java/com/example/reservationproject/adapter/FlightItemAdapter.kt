@@ -57,7 +57,7 @@ class FlightItemAdapter(
         holder.airlineNameTxt.text = item[position].airlineName
         holder.fromWhereTxt.text = item[position].departureCity
         holder.toWhereTxt.text = item[position].landingCity
-        holder.priceTxt.text = item[position].adultSeatPrice.toString() +"₺"
+        holder.priceTxt.text = item[position].adultSeatPrice.toString() +"$"
         holder.duration.text = item[position].duration.toString() + " Saat"
     }
 

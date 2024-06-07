@@ -108,7 +108,7 @@
             android:layout_marginTop="7dp"
             android:layout_marginEnd="172dp"
             android:layout_marginBottom="6dp"
-            android:text="Seyahatlerim"
+            android:text="@string/my_tour_tickets"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView15"

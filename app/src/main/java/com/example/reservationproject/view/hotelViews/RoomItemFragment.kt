@@ -11,16 +11,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.bezalibrary.service.Functions
+import com.example.bezalibrary.service.RetrofitClient
+import com.example.bezalibrary.service.model.HotelRes
 import com.example.reservationproject.R
 import com.example.reservationproject.databinding.FragmentRoomItemBinding
 import com.example.reservationproject.manager.AppPref
 import com.example.reservationproject.utils.DateFunctions
 import com.example.reservationproject.utils.DatePicker
+import com.example.reservationproject.view.DashboardFragment
 import com.example.reservationproject.view.LogRegActivity
 import com.example.reservationproject.viewmodel.RoomItemViewModel
 
@@ -37,8 +40,11 @@ class RoomItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRoomItemBinding.inflate(inflater, container, false)
-
         val token = AppPref(requireContext()).getToken()
+        Log.e("token",token.toString())
+        if (token != null) {
+            RetrofitClient.setAuthToken(token)
+        }
         val dateFunc = DateFunctions
         val roomId = requireArguments().getLong("roomId")
         val hotelId = requireArguments().getLong("hotelId")
@@ -46,7 +52,7 @@ class RoomItemFragment : Fragment() {
 
         viewModel.room.observe(viewLifecycleOwner) {
             price = it.roomPrice
-            binding.priceTxt.text = it.roomPrice.toString() + "₺"
+            binding.priceTxt.text = it.roomPrice.toString() + "$"
             binding.roomTypeTxt.text = it.roomType + "Oda"
             Glide.with(requireContext())
                 .load(it.roomImage)
@@ -75,7 +81,6 @@ class RoomItemFragment : Fragment() {
                 viewModel::setStartDate
             )
         }
-
         binding.endCons.setOnClickListener {
             DatePicker.DateUtil.showDatePicker(
                 requireContext(),
@@ -85,26 +90,35 @@ class RoomItemFragment : Fragment() {
         }
 
         binding.resRoomBtn.setOnClickListener {
-            if(token!=null) {
-                val checkIn = startDateButton.text.toString()
-                val checkOut = endDateButton.text.toString()
-                viewModel.checkReservation(roomId, checkIn, checkOut)
-            }else{
+            if (token != null) {
+                val newHotelRoomRes = HotelRes(
+                    roomId.toInt(),
+                    dateFunc.convertDateToISOFormat(startDateButton.text.toString()),
+                    dateFunc.convertDateToISOFormat(endDateButton.text.toString())
+                )
+                viewModel.createRoomReservation(newHotelRoomRes)
+            } else {
                 showLoginConfirmationDialog()
             }
         }
-        viewModel.isTotalPrice.observe(viewLifecycleOwner){
-            totalDay = dateFunc.getDaysDifference(
-                startDateButton.text.toString(),
-                endDateButton.text.toString()
-            )
-            totalPrice = price?.times(totalDay!!)
-            binding.resRoomBtn.text = "Rezerve Et" + "(" + totalPrice.toString() + "TL)"
+        viewModel.isTotalPrice.observe(viewLifecycleOwner) {
+            totalDay = dateFunc.getDaysDifference(startDateButton.text.toString(), endDateButton.text.toString())
+
+            if(totalDay!!.toInt()>0){
+                totalPrice = price?.times(totalDay!!)
+                binding.resRoomBtn.text = "Rezerve Et" + "(" + totalPrice.toString() + "$)"
+
+                val checkIn = startDateButton.text.toString()
+                val checkOut = endDateButton.text.toString()
+                viewModel.checkReservation(roomId, checkIn, checkOut)
+            }else {
+                Toast.makeText(requireContext(), "Çıkış Tarihi Giriş Tarihinden ileri tarihli olmalıdır!", Toast.LENGTH_LONG).show()
+            }
         }
 
         viewModel.isRoomAvailable.observe(viewLifecycleOwner) {
             if (it) {
-                //stripe
+
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -114,8 +128,15 @@ class RoomItemFragment : Fragment() {
             }
         }
 
+        viewModel.isRes.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_roomItemFragment_to_paymentFragment, Bundle().apply {
+                putString("url",it)
+                putString("typeOfTicket","Hotel")
+            })
+        }
         return binding.root
     }
+
     private fun showLoginConfirmationDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Kulllanıcı Bilgisi Boş")

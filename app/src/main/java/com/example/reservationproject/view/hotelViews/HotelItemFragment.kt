@@ -31,7 +31,7 @@ class HotelItemFragment : Fragment() {
             binding.hotelNameTxt.text = hotel.name
             binding.locationTxt.text = hotel.locationName
             binding.textView17.text = hotel.description
-            binding.priceTxt.text = "${hotel.price} ${hotel.currencyName}"
+            binding.priceTxt.text = "${hotel.price}"+"$"
             binding.ratingBar.rating = hotel.stars.toFloat()
             Glide.with(requireContext())
                 .load(hotel.image)

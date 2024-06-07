@@ -35,7 +35,7 @@ class HotelItemAdapter(
             Glide.with(context).load(hotelElement.image).into(photoImgView)
             hotelNameTxt.text = hotelElement.name
             locationTxt.text = hotelElement.locationName
-            priceTxt.text = hotelElement.price.toString() + hotelElement.currencyName
+            priceTxt.text = hotelElement.price.toString() + "$"
             ratingBar.rating = hotelElement.stars.toFloat()
         }
     }

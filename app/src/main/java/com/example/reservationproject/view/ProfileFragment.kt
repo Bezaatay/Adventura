@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.reservationproject.R
 import com.example.reservationproject.databinding.FragmentProfileBinding
 import com.example.reservationproject.manager.AppPref
 import com.example.reservationproject.viewmodel.ProfileViewModel
@@ -25,14 +27,32 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         val appPref = AppPref(requireContext())
         val token = AppPref(requireContext()).getToken()
+        Log.e("tken",token.toString())
         if (token != null) {
             binding.logBtn.visibility = View.INVISIBLE
+            binding.signOutBtn.visibility = View.VISIBLE
+            binding.fullNameTxt.text = appPref.getNameAndSurname()
         }
         if (token == null) {
             binding.fullNameTxt.text = "Misafir Kullanıcı"
             binding.textView11.visibility = View.INVISIBLE
+            binding.signOutBtn.visibility = View.INVISIBLE
         }
-        binding.fullNameTxt.text = appPref.getNameAndSurname()
+        binding.constraintLayout9.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_navigation_dashboard, Bundle().apply {
+                putString("typeOfTicket","Tour")
+            })
+        }
+        binding.constraintLayout10.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_navigation_dashboard, Bundle().apply {
+                putString("typeOfTicket","Flight")
+            })
+        }
+        binding.constraintLayout11.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_navigation_dashboard, Bundle().apply {
+                putString("typeOfTicket","Hotel")
+            })
+        }
 
         binding.logBtn.setOnClickListener {
             val intent = Intent(requireContext(), LogRegActivity::class.java)

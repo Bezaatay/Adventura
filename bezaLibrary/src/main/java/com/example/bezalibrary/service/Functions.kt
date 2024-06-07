@@ -9,17 +9,28 @@ import com.example.bezalibrary.service.repo.ServiceInterface
 import com.example.bezalibrary.service.model.BlogElement
 import com.example.bezalibrary.service.model.Flight1Element
 import com.example.bezalibrary.service.model.FlightElement
+import com.example.bezalibrary.service.model.FlightRes
+import com.example.bezalibrary.service.model.FlightTicket
+import com.example.bezalibrary.service.model.FlightTicketWithSecondData
 import com.example.bezalibrary.service.model.HotelElement
+import com.example.bezalibrary.service.model.HotelRes
 import com.example.bezalibrary.service.model.HotelReservationCheck
 import com.example.bezalibrary.service.model.HotelRoomElement
+import com.example.bezalibrary.service.model.HotelTicket
+import com.example.bezalibrary.service.model.HotelTicketWithFullData
 import com.example.bezalibrary.service.model.LocationElement
-import com.example.reservationproject.model.NewUser
-import com.example.reservationproject.model.RegisterResponse
+import com.example.bezalibrary.service.model.NewUser
+import com.example.bezalibrary.service.model.Payment
+import com.example.bezalibrary.service.model.RegisterResponse
+import com.example.bezalibrary.service.model.ResResponse
 import com.example.bezalibrary.service.model.TourElement
 import com.example.bezalibrary.service.model.TourLocation
+import com.example.bezalibrary.service.model.TourRes
+import com.example.bezalibrary.service.model.TourTicket
+import com.example.bezalibrary.service.model.TourTicketWithFullData
 import com.example.bezalibrary.service.model.TourTypeElement
-import com.example.reservationproject.model.UserLogin
-import com.example.reservationproject.model.UserLoginResponse
+import com.example.bezalibrary.service.model.UserLogin
+import com.example.bezalibrary.service.model.UserLoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -135,7 +146,6 @@ class Functions {
                 val data = response.body()
                 if (data?.message != null) {
                     if (data.message == "Kullanıcı Oluşturuldu") {
-                        Log.e("kullınıcı olusturuldu", "ok")
                     }
                 } else {
                     Log.e("HATA", "Kullanıcı Oluşturulamadı")
@@ -344,20 +354,28 @@ class Functions {
                             // Check for overlapping dates
                             if (checkIn <= reservationCheckOut && checkOut >= reservationCheckIn) {
                                 isRoomAvailable = false
+
+                                Log.e("hata","dolu")
                                 return@forEach
+                            }
+                            else{
+                                Log.e("hata","bos")
+
                             }
                         }
                     }
                     liveData.postValue(isRoomAvailable)
                 } else {
-                    // API isteği başarısız olduğunda false değerini döndür
                     liveData.postValue(false)
+                    Log.e("hata","2")
+
                 }
             }
 
             override fun onFailure(call: Call<List<HotelReservationCheck>>, t: Throwable) {
-                // Ağ hatası olduğunda false değerini döndür
                 liveData.postValue(false)
+                Log.e("hata","3")
+
             }
         })
         return liveData
@@ -503,12 +521,11 @@ class Functions {
     }
 
     fun getHotelNameByHotelId(hotelId: Long?): LiveData<String> {
-
         val liveData = MutableLiveData<String>()
         service.getHotelNameByHotelId(hotelId).enqueue(object : Callback<HotelElement> {
             override fun onResponse(call: Call<HotelElement>, response: Response<HotelElement>) {
                 liveData.value = response.body()?.name
-                Log.e("hoteln",response.body()?.name.toString())
+                Log.e("hoteln", response.body()?.name.toString())
             }
 
             override fun onFailure(call: Call<HotelElement>, t: Throwable) {
@@ -518,4 +535,301 @@ class Functions {
         return liveData
     }
 
+    fun createFlightReservation(newFlightRes: FlightRes): LiveData<Boolean> {
+        val liveData = MutableLiveData<Boolean>()
+        service.createFlightReservation(newFlightRes).enqueue(object : Callback<ResResponse> {
+            override fun onResponse(call: Call<ResResponse>, response: Response<ResResponse>) {
+                response.body()?.let { Log.e("reserv resp", it.message) }
+
+                if (response.body()?.message.toString() == "Rezervasyon Oluşturuldu") {
+                    Log.e("reserv oluştu", "res yapıldı")
+                    liveData.value = true
+                } else {
+                    // Rezervasyon eklenemedi veya başka bir hata durumu
+                    Log.e("reserv oluşmadı", "res yapılmadı")
+
+                     liveData.value = false
+                }
+            }
+
+            override fun onFailure(call: Call<ResResponse>, t: Throwable) {
+                Log.e("hata", t.toString())
+                liveData.value = false
+            }
+        })
+        return liveData
+    }
+
+    fun createRoomReservation(newHotelRoomRes: HotelRes): LiveData<Boolean> {
+        val liveData = MutableLiveData<Boolean>()
+        service.createRoomReservation(newHotelRoomRes).enqueue(object : Callback<ResResponse> {
+            override fun onResponse(call: Call<ResResponse>, response: Response<ResResponse>) {
+                Log.e("RESPBOD",response.body().toString())
+                liveData.value = response.body()?.message.toString() == "Rezervasyon Eklendi"
+            }
+
+            override fun onFailure(call: Call<ResResponse>, t: Throwable) {
+                Log.e("hata", t.toString())
+                liveData.value = false // Hata durumunu LiveData'ya bildir
+            }
+        })
+        return liveData
+    }
+
+    fun createTourReservation(newTourRes: TourRes): LiveData<Boolean> {
+        val liveData = MutableLiveData<Boolean>()
+
+        service.createTourReservation(newTourRes).enqueue(object : Callback<ResResponse> {
+            override fun onResponse(call: Call<ResResponse>, response: Response<ResResponse>) {
+                liveData.value = response.body()?.message.toString() == "Rezervasyon Yapıldı"
+            }
+
+            override fun onFailure(call: Call<ResResponse>, t: Throwable) {
+                liveData.value = false
+            }
+        })
+
+        return liveData
+    }
+
+    fun getMyFlightReservations(): LiveData<List<FlightTicketWithSecondData>> {
+        val liveData = MutableLiveData<List<FlightTicketWithSecondData>>()
+        val flightTicketsWithSecondDataList = mutableListOf<FlightTicketWithSecondData>()
+
+        service.getMyFlightReservations().enqueue(object : Callback<List<FlightTicket>> {
+            override fun onResponse(
+                call: Call<List<FlightTicket>>,
+                response: Response<List<FlightTicket>>
+            ) {
+                response.body()?.let { flightTickets ->
+                    for (flightTicket in flightTickets) {
+                        service.getFlightById(flightTicket.flightID.toLong())
+                            .enqueue(object : Callback<FlightElement> {
+                                override fun onResponse(
+                                    call: Call<FlightElement>,
+                                    response: Response<FlightElement>
+                                ) {
+                                    response.body()?.let { flightElement ->
+                                        val combinedData = FlightTicketWithSecondData(
+                                            flightReservationID = flightTicket.flightReservationID,
+                                            name = flightTicket.name,
+                                            surname = flightTicket.surname,
+                                            email = flightTicket.email,
+                                            phone = flightTicket.phone,
+                                            flightID = flightTicket.flightID,
+                                            age = flightTicket.age,
+                                            status = flightTicket.status,
+                                            totalPrice = flightTicket.totalPrice,
+                                            departureCity = flightTicket.departureCity,
+                                            landingCity = flightTicket.landingCity,
+                                            secondData = flightElement
+                                        )
+                                        flightTicketsWithSecondDataList.add(combinedData)
+                                        if (flightTicketsWithSecondDataList.size == flightTickets.size) {
+                                            liveData.value = flightTicketsWithSecondDataList
+                                        }
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<FlightElement>, t: Throwable) {
+                                    Log.e("API Error", t.message ?: "Unknown error")
+                                }
+                            })
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<FlightTicket>>, t: Throwable) {
+                Log.e("API Error", t.message ?: "Unknown error")
+            }
+        })
+
+        return liveData
+    }
+
+    fun getMyHotelReservations(): LiveData<List<HotelTicketWithFullData>> {
+        val liveData = MutableLiveData<List<HotelTicketWithFullData>>()
+
+        service.getMyHotelReservations().enqueue(object : Callback<List<HotelTicket>> {
+            override fun onResponse(
+                call: Call<List<HotelTicket>>,
+                response: Response<List<HotelTicket>>
+            ) {
+                if (response.isSuccessful) {
+                    val hotelTickets = response.body() ?: emptyList()
+                    val combinedData = mutableListOf<HotelTicketWithFullData>()
+
+                    hotelTickets.forEach { hotelTicket ->
+                        service.getRoomById(hotelTicket.hotelRoomId.toLong())
+                            .enqueue(object : Callback<HotelRoomElement> {
+                                override fun onResponse(
+                                    call: Call<HotelRoomElement>,
+                                    roomResponse: Response<HotelRoomElement>
+                                ) {
+                                    if (roomResponse.isSuccessful) {
+                                        val roomInfo = roomResponse.body()
+                                        if (roomInfo != null) {
+                                            service.getHotelById(roomInfo.hotelID)
+                                                .enqueue(object : Callback<HotelElement> {
+                                                    override fun onResponse(
+                                                        call: Call<HotelElement>,
+                                                        hotelResponse: Response<HotelElement>
+                                                    ) {
+                                                        if (hotelResponse.isSuccessful) {
+                                                            val hotelInfo = hotelResponse.body()
+                                                            if (hotelInfo != null) {
+                                                                val fullData =
+                                                                    HotelTicketWithFullData(
+                                                                        hotelReservationID = hotelTicket.hotelReservationID,
+                                                                        hotelRoomId = hotelTicket.hotelRoomId,
+                                                                        checkInDate = hotelTicket.checkInDate,
+                                                                        checkOutDate = hotelTicket.checkOutDate,
+                                                                        status = hotelTicket.status,
+                                                                        totalPrice = hotelTicket.totalPrice,
+                                                                        username = hotelTicket.username,
+                                                                        roomInfos = roomInfo,
+                                                                        hotelInfos = hotelInfo
+                                                                    )
+                                                                combinedData.add(fullData)
+                                                                // If all hotel tickets have been processed, update live data
+                                                                if (combinedData.size == hotelTickets.size) {
+                                                                    liveData.postValue(combinedData)
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    override fun onFailure(
+                                                        call: Call<HotelElement>,
+                                                        t: Throwable
+                                                    ) {
+                                                        Log.e(
+                                                            "API Error",
+                                                            "Failed to fetch hotel info",
+                                                            t
+                                                        )
+                                                    }
+                                                })
+                                        }
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<HotelRoomElement>, t: Throwable) {
+                                    Log.e("API Error", "Failed to fetch room info", t)
+                                }
+                            })
+                    }
+                } else {
+                    Log.e("API Error", "Failed to fetch hotel reservations: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<HotelTicket>>, t: Throwable) {
+                Log.e("API Error", "Failed to fetch hotel reservations", t)
+            }
+        })
+        return liveData
+    }
+
+    fun getMyTourReservations(): LiveData<List<TourTicketWithFullData>> {
+        val liveData = MutableLiveData<List<TourTicketWithFullData>>()
+
+        service.getMyTourReservations().enqueue(object : Callback<List<TourTicket>> {
+            override fun onResponse(call: Call<List<TourTicket>>, response: Response<List<TourTicket>>) {
+                val tourTickets = response.body()
+                val combinedData = mutableListOf<TourTicketWithFullData>()
+                tourTickets.let {
+                    if (it != null) {
+                        for (s in it) {
+                            service.getTourById(s.tourId.toLong()).enqueue(object : Callback<TourElement> {
+                                    override fun onResponse(call: Call<TourElement>, response: Response<TourElement>) {
+                                        if (response.isSuccessful) {
+                                            val tourInfo = response.body()
+                                            if (tourInfo != null) {
+                                                val fullData = TourTicketWithFullData(
+                                                    id = s.id,
+                                                    tourId = s.tourId,
+                                                    tourName = s.tourName,
+                                                    totalPrice = s.totalPrice,
+                                                    person = s.person,
+                                                    status = s.status,
+                                                    tourInfo = tourInfo
+                                                )
+                                                combinedData.add(fullData)
+                                                // If all hotel tickets have been processed, update live data
+                                                if (combinedData.size == it.size) {
+                                                    liveData.postValue(combinedData)
+                                                }
+                                            }
+                                        } else {
+                                            Log.e(
+                                                "API Error",
+                                                "Failed to fetch tour reservations: ${response.message()}"
+                                            )
+                                        }
+                                    }
+
+                                    override fun onFailure(call: Call<TourElement>, t: Throwable) {
+                                        Log.e("API Error", "Failed to fetch tour info", t)
+                                    }
+                                })
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<TourTicket>>, t: Throwable) {
+                Log.e("API Error", "Failed to fetch tour reservations", t)
+            }
+        })
+
+        return liveData
+    }
+
+    fun getPaymentUrl() : LiveData<Payment> {
+        val liveData = MutableLiveData<Payment>()
+        service.getPaymentUrl().enqueue(object : Callback<Payment>{
+            override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
+                if(response.isSuccessful){
+                    liveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Payment>, t: Throwable) {
+
+            }
+        })
+        return liveData
+    }
+
+    fun getPaymentHotelUrl(): LiveData<Payment> {
+        val liveData = MutableLiveData<Payment>()
+        service.getPaymentHotelUrl().enqueue(object : Callback<Payment>{
+            override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
+                if(response.isSuccessful){
+                    liveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Payment>, t: Throwable) {
+
+            }
+        })
+        return liveData
+    }
+    fun getPaymentTourUrl(): LiveData<Payment> {
+        val liveData = MutableLiveData<Payment>()
+        service.getPaymentTourUrl().enqueue(object : Callback<Payment>{
+            override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
+                if(response.isSuccessful){
+                    liveData.value = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<Payment>, t: Throwable) {
+
+            }
+        })
+        return liveData
+    }
 }

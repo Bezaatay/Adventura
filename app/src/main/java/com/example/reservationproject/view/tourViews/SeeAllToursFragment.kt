@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bezalibrary.service.Functions
 import com.example.bezalibrary.service.model.TourElement
+import com.example.reservationproject.R
 import com.example.reservationproject.adapter.HotelItemAdapter
 import com.example.reservationproject.adapter.TourItemAdapter
 import com.example.reservationproject.databinding.FragmentSeeAllToursBinding
@@ -41,6 +43,10 @@ class SeeAllToursFragment : Fragment(), TourItemAdapter.OnTourItemClickListener 
     }
 
     override fun onTourItemClick(position: Int, tourId: Long) {
-        Log.e("tourId",tourId.toString())
+            findNavController().navigate(
+                R.id.action_seeAllToursFragment_to_tourItemFragment,
+                Bundle().apply {
+                    putLong("tourId", tourId)
+                })
     }
 }

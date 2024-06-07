@@ -4,12 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bezalibrary.service.Functions
+import com.example.bezalibrary.service.model.Payment
+
 import com.example.bezalibrary.service.model.TourElement
+import com.example.bezalibrary.service.model.TourRes
 
 class TourItemViewModel : ViewModel() {
     val functions = Functions()
     private var _tour = MutableLiveData<TourElement>()
     val tour: LiveData<TourElement> get() = _tour
+
+    private val _isRes = MutableLiveData<String>()
+    val isRes: LiveData<String> get() = _isRes
     fun getTourById(tourId: Long) {
         functions.getTourById(tourId).observeForever {
             _tour.value = it
@@ -68,5 +74,15 @@ class TourItemViewModel : ViewModel() {
         val priceChild = _priceChild.value ?: 0
 
         _totalAmount.value = (adultCount * priceAdult) + (childCount * priceChild)
+    }
+
+    fun createTourReservation(newTourRes: TourRes) {
+        functions.createTourReservation(newTourRes).observeForever { it1 ->
+            if(it1){
+                functions.getPaymentTourUrl().observeForever {
+                    _isRes.value = it.url
+                }
+            }
+        }
     }
 }

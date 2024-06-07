@@ -37,9 +37,10 @@ data class TourElement(
     val tourTypeName: String,
     val image: String
 )
+
 data class TourLocation(
     val location: String
-    )
+)
 
 data class FlightElement(
     val id: Long,
@@ -59,9 +60,11 @@ data class FlightElement(
     val flightTypeID: Long,
     val flightTypeName: String,
     val departureCity: String,
-    val landingCity: String
+    val landingCity: String,
+    val available: Boolean
 )
-data class Flight1Element (
+
+data class Flight1Element(
     val flightId: Long,
     val airlineID: Long,
     val airlineName: String,
@@ -82,7 +85,7 @@ data class Flight1Element (
     val airlineImage: String
 )
 
-data class BlogElement (
+data class BlogElement(
     val id: Int,
     val image: String,
     val title: String,
@@ -91,7 +94,8 @@ data class BlogElement (
     val blogCategoryID: Long,
     val blogCategoryName: String
 )
-data class HotelRoomElement (
+
+data class HotelRoomElement(
     val hotelRoomID: Long,
     val roomPrice: Long,
     val roomNumber: String,
@@ -99,18 +103,22 @@ data class HotelRoomElement (
     val roomImage: String,
     val hotelID: Long
 )
+
 data class AirportElement(
-    val id : Long,
-    val name : String
+    val id: Long,
+    val name: String
 )
+
 data class LocationElement(
-    val id : Long,
-    val name : String
+    val id: Long,
+    val name: String
 )
+
 data class TourTypeElement(
-    val id : Long,
-    val name : String
+    val id: Long,
+    val name: String
 )
+
 data class HotelReservationCheck(
     @SerializedName("hotelReservationID") val hotelReservationID: Int,
     @SerializedName("hotelRoomId") val hotelRoomId: Int,
@@ -118,4 +126,102 @@ data class HotelReservationCheck(
     @SerializedName("checkOutDate") val checkOutDate: String,
     @SerializedName("status") val status: String,
     @SerializedName("totalPrice") val totalPrice: Double
+)
+
+data class FlightRes(
+    @SerializedName("name") val name: String,
+    @SerializedName("surname") val surname: String,
+    @SerializedName("Email") val email: String,
+    @SerializedName("Phone") val phone: String,
+    @SerializedName("flightId") val flightId: Int,
+    @SerializedName("age") val age: Int
+)
+
+data class TourRes(
+    val tourId: Long,
+    val person: Int
+)
+
+data class HotelRes(
+    val hotelRoomId: Int,
+    val checkInDate: String,
+    val checkOutDate: String
+)
+
+data class ResResponse(
+    val message: String,
+)
+
+data class FlightTicket(
+    @SerializedName("flightReservationID") val flightReservationID: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("surname") val surname: String,
+    @SerializedName("email") val email: String,
+    @SerializedName("phone") val phone: String,
+    @SerializedName("flightID") val flightID: Int,
+    @SerializedName("age") val age: Int,
+    @SerializedName("status") val status: String,
+    @SerializedName("seatNumber") val seatNumber: String,
+    @SerializedName("totalPrice") val totalPrice: Double,
+    @SerializedName("departureCity") val departureCity: String,
+    @SerializedName("landingCity") val landingCity: String
+)
+
+data class HotelTicket(
+    @SerializedName("hotelReservationID") val hotelReservationID: Int,
+    @SerializedName("hotelRoomId") val hotelRoomId: Int,
+    @SerializedName("checkInDate") val checkInDate: String,
+    @SerializedName("checkOutDate") val checkOutDate: String,
+    @SerializedName("status") val status: String,
+    @SerializedName("totalPrice") val totalPrice: Double,
+    @SerializedName("username") val username: String
+)
+
+data class HotelTicketWithFullData(
+    @SerializedName("hotelReservationID") val hotelReservationID: Int,
+    @SerializedName("hotelRoomId") val hotelRoomId: Int,
+    @SerializedName("checkInDate") val checkInDate: String,
+    @SerializedName("checkOutDate") val checkOutDate: String,
+    @SerializedName("status") val status: String,
+    @SerializedName("totalPrice") val totalPrice: Double,
+    @SerializedName("username") val username: String,
+    val roomInfos: HotelRoomElement,
+    val hotelInfos: HotelElement
+)
+
+data class TourTicket(
+    @SerializedName("id") val id: Int,
+    @SerializedName("tourID") val tourId: Int,
+    @SerializedName("tourName") val tourName: String,
+    @SerializedName("totalPrice") val totalPrice: Double,
+    @SerializedName("person") val person: Int,
+    @SerializedName("status") val status: String
+)
+
+data class TourTicketWithFullData(
+    @SerializedName("id") val id: Int,
+    @SerializedName("tourID") val tourId: Int,
+    @SerializedName("tourName") val tourName: String,
+    @SerializedName("totalPrice") val totalPrice: Double,
+    @SerializedName("person") val person: Int,
+    @SerializedName("status") val status: String,
+    val tourInfo: TourElement
+)
+
+data class FlightTicketWithSecondData(
+    @SerializedName("flightReservationID") val flightReservationID: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("surname") val surname: String,
+    @SerializedName("email") val email: String,
+    @SerializedName("phone") val phone: String,
+    @SerializedName("flightID") val flightID: Int,
+    @SerializedName("age") val age: Int,
+    @SerializedName("status") val status: String,
+    @SerializedName("totalPrice") val totalPrice: Double,
+    @SerializedName("departureCity") val departureCity: String,
+    @SerializedName("landingCity") val landingCity: String,
+    val secondData: FlightElement
+)
+data class Payment(
+    val url : String
 )

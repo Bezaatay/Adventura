@@ -39,7 +39,6 @@ class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
 
         functions.getFeaturedHotels()
 
-
         viewModel.featuredHotels.observe(viewLifecycleOwner) {
             it?.let {
                 val adapter = HotelItemAdapter(requireContext(), it, this, "HomeFragment")

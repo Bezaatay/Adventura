@@ -1,17 +1,5 @@
-package com.example.reservationproject.model
-data class UserData(
-    val _id: String,
-    val username: String,
-    val name: String,
-    val surname: String,
-    val phoneNumber: String,
-    val email: String,
-    val city: String,
-    val location: String,
-    val latitude: String,
-    val longitude: String,
-    val isVerrified: Boolean,
-)
+package com.example.bezalibrary.service.model
+
 
 data class NewUser(
     val email: String,
@@ -33,13 +21,4 @@ data class UserLoginResponse(
 
 data class RegisterResponse(
     val message: String,
-)
-
-data class ForgotPassword(
-    val message: String,
-)
-
-data class ResetPassword(
-    val password: String,
-    val confirmPassword: String,
 )

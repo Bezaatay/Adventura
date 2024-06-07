@@ -1,14 +1,16 @@
 package com.example.reservationproject.viewmodel
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.bezalibrary.service.Functions
+import com.example.bezalibrary.service.model.HotelRes
 import com.example.bezalibrary.service.model.HotelRoomElement
+import com.example.bezalibrary.service.model.Payment
+import com.example.reservationproject.utils.DateFunctions.convertDateToISOFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -23,6 +25,8 @@ class RoomItemViewModel : ViewModel() {
     val  isRoomAvailable :MutableLiveData<Boolean> get() = _isRoomAvailable
     private val  _isTotalPrice = MutableLiveData<Boolean>()
     val  isTotalPrice :MutableLiveData<Boolean> get() = _isTotalPrice
+    private val  _isRes = MutableLiveData<String>()
+    val  isRes :MutableLiveData<String> get() = _isRes
 
     private val _hotelName = MutableLiveData<String>()
     val hotelName: MutableLiveData<String> get() = _hotelName
@@ -37,6 +41,16 @@ class RoomItemViewModel : ViewModel() {
             _hotelName.value = it
         }
     }
+    fun createRoomReservation(newHotelRoomRes: HotelRes) {
+            functions.createRoomReservation(newHotelRoomRes).observeForever {isRess ->
+                if(isRess){
+                    functions.getPaymentHotelUrl().observeForever {
+                        _isRes.value = it.url
+                    }
+                }
+            }
+    }
+
     val startDate: MutableLiveData<String> by lazy {
         MutableLiveData<String>().apply {
             value = formatDate(Calendar.getInstance())
@@ -77,21 +91,8 @@ class RoomItemViewModel : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkReservation(roomId: Long, checkIn: String, checkOut: String) {
-        functions.checkReservation(roomId,convertDateFormat(checkIn),convertDateFormat(checkOut)).observeForever{
+        functions.checkReservation(roomId,convertDateToISOFormat(checkIn),convertDateToISOFormat(checkOut)).observeForever{
         _isRoomAvailable.value = it
-        }
-    }
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun convertDateFormat(inputDate: String): String {
-        val inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault())
-        val outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'00:00:00", Locale.getDefault())
-
-        return try {
-            val date = LocalDate.parse(inputDate, inputFormatter)
-            date.format(outputFormatter)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            ""
         }
     }
 }

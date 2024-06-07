@@ -88,6 +88,8 @@ class AppPref(context: Context) {
         editor.apply {
             editor.remove(mail_KEY)
             editor.remove(password_KEY)
+            editor.remove(name_KEY)
+            editor.remove(surname_KEY)
             editor.putBoolean(isChecked_KEY, false)
             apply()
         }

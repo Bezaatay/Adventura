@@ -33,16 +33,13 @@ class FlightInfoItemFragment : Fragment() {
         viewModel.flight.observe(viewLifecycleOwner) {
             Glide.with(requireContext()).load(it.airlineImage).into(binding.airlinePhoto)
             binding.airlineNameTxt.text = it.airlineName
-            binding.priceTxt.text = it.adultSeatPrice.toString() + " ₺"
+            binding.priceTxt.text = it.adultSeatPrice.toString() + "$"
             totalPrice = it.adultSeatPrice
             binding.arrivalTimeTxt.text = dateFunc.convertDateTimeToHourAndMinute(it.arrivalTime)
             binding.durationTxt.text = it.duration.toString() + " Saat"
-            binding.departureTimeTxt.text =
-                dateFunc.convertDateTimeToHourAndMinute(it.departureTime)
-            binding.fullDepartureInfoTxt.text =
-                dateFunc.convertDateToFullDate(it.departureTime) + ", " + it.departureCity
-            binding.fullArrivalInfoTxt.text =
-                dateFunc.convertDateToFullDate(it.arrivalTime) + ", " + it.landingCity
+            binding.departureTimeTxt.text = dateFunc.convertDateTimeToHourAndMinute(it.departureTime)
+            binding.fullDepartureInfoTxt.text = dateFunc.convertDateToFullDate(it.departureTime) + ", " + it.departureCity
+            binding.fullArrivalInfoTxt.text = dateFunc.convertDateToFullDate(it.arrivalTime) + ", " + it.landingCity
             binding.airportInfoTxt.text = it.airportName
         }
 

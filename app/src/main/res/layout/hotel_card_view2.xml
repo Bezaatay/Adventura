@@ -21,37 +21,37 @@
                 android:id="@+id/hotelNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="37dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/hotel_name"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.06"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/photoImgView" />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="25dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/hotelNameTxt"
                 app:layout_constraintTop_toBottomOf="@+id/hotelNameTxt"
+                app:layout_constraintVertical_bias="0.352"
                 app:srcCompat="@drawable/marker" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="57dp"
-                android:layout_marginEnd="192dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="193dp"
                 android:isIndicator="true"
                 android:scaleX="0.35"
                 android:scaleY="0.35"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/photoImgView"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/photoImgView" />
 
             <TextView
                 android:id="@+id/locationTxt"
@@ -68,17 +68,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/prize"
                 app:layout_constraintBottom_toTopOf="@+id/findRoomBtn"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/photoImgView" />
+                app:layout_constraintTop_toBottomOf="@+id/photoImgView"
+                app:layout_constraintVertical_bias="0.375" />
 
             <ImageView
                 android:id="@+id/photoImgView"
-                android:layout_width="420dp"
+                android:layout_width="361dp"
                 android:layout_height="188dp"
                 android:layout_marginTop="7dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
