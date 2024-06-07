@@ -31,9 +31,9 @@ Adventura is a mobile application designed to make life easier for travel enthus
 ## Homepage
 
 <div style="display: flex; flex-wrap: wrap;">
-    <img width="200" alt="Homepage1" src="https://github.com/Bezaatay/Adventura/assets/133115182/d7418765-50a3-44fc-a9c1-171bfa79316e">
-    <img width="200" alt="Homepage2" src="https://github.com/Bezaatay/Adventura/assets/133115182/49bdfef0-7acf-4ad8-a848-a93fa40ad6e8">
-    <img width="200" alt="Homepage3" src="https://github.com/Bezaatay/Adventura/assets/133115182/3002e095-aa10-4291-908c-d9583bb0b464">
+    <img width="200" alt="Homepage1" src="https://github.com/Bezaatay/Adventura/assets/133115182/f7a3de38-9ea1-4ac5-b07c-d24ea9207c2a">
+    <img width="200" alt="Homepage2" src="https://github.com/Bezaatay/Adventura/assets/133115182/b75f1714-c639-4460-b369-a5e4647e348f">
+    <img width="200" alt="Homepage3" src="https://github.com/Bezaatay/Adventura/assets/133115182/636c56e5-6266-46b3-a6c0-860da14b1b94">
   
 </div>
 
