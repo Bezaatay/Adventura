@@ -7,6 +7,7 @@
     android:id="@+id/constraint"
     android:background="@drawable/searchbar_outline"
     tools:context=".view.hotelViews.ResHotel">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -23,21 +24,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/searchbar_rv"
-                android:layout_width="290dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:backgroundTint="@color/white"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:numColumns="5"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/searchText"
-                app:layout_constraintHorizontal_bias="0.3"
-                app:layout_constraintStart_toStartOf="@+id/searchText"
-                app:layout_constraintTop_toBottomOf="@+id/searchText" />
 
             <View
                 android:layout_width="350dp"
@@ -130,6 +116,21 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView9"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchbar_rv"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:numColumns="5"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/searchText"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toStartOf="@+id/searchText"
+                app:layout_constraintTop_toBottomOf="@+id/searchText" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

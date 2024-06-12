@@ -25,37 +25,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/searchbar"
-                android:layout_width="290dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:backgroundTint="@color/white"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:numColumns="5"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/searchText"
-                app:layout_constraintHorizontal_bias="0.3"
-                app:layout_constraintStart_toStartOf="@+id/searchText"
-                app:layout_constraintTop_toBottomOf="@+id/searchText" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/searchbar2"
-                android:layout_width="290dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:backgroundTint="@color/white"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:numColumns="5"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/searchText2"
-                app:layout_constraintStart_toStartOf="@+id/searchText2"
-                app:layout_constraintTop_toBottomOf="@+id/searchText2">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
             <View
                 android:layout_width="350dp"
                 android:layout_height="1dp"
@@ -157,6 +126,37 @@
                 app:layout_constraintEnd_toStartOf="@+id/searchText2"
                 app:layout_constraintStart_toStartOf="@+id/textView15"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchbar2"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:numColumns="5"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/searchText2"
+                app:layout_constraintStart_toStartOf="@+id/searchText2"
+                app:layout_constraintTop_toBottomOf="@+id/searchText2">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchbar"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:numColumns="5"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/searchText"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toStartOf="@+id/searchText"
+                app:layout_constraintTop_toBottomOf="@+id/searchText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

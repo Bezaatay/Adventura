@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_resFlight_to_searchFlightFragment"
             app:destination="@id/searchFlightFragment" />
+        <action
+            android:id="@+id/action_resFlight_to_flightItemFragment"
+            app:destination="@id/flightItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/resTour"

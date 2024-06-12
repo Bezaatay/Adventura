@@ -35,6 +35,7 @@ class DashboardFragment : Fragment(),
         if (token != null) {
             RetrofitClient.setAuthToken(token)
         }
+        else binding.isEmptyTxt.text = "Biletleri görüntülemek için giriş yapınız."
 
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
         viewModel.getMyFlightReservations()
@@ -66,6 +67,7 @@ class DashboardFragment : Fragment(),
         }
 
         viewModel.flightTickets.observe(viewLifecycleOwner) {
+
             it?.let {
                 val adapter = FlightTicketAdapter(requireContext(), it, this)
                 binding.rv.adapter = adapter
@@ -82,6 +84,10 @@ class DashboardFragment : Fragment(),
                 val adapter = TourTicketAdapter(requireContext(), it, this)
                 binding.rv.adapter = adapter
             }
+        }
+        viewModel.isEmpty.observe(viewLifecycleOwner) {
+            binding.isEmptyTxt.visibility = View.VISIBLE
+            binding.rv.visibility = View.INVISIBLE
         }
 
         return binding.root

@@ -15,6 +15,8 @@ class DashboardViewModel : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> get() = _isLoading
+    private val _isEmpty = MutableLiveData<Boolean>()
+    val isEmpty : LiveData<Boolean> get() = _isLoading
 
     private val _flightTickets = MutableLiveData<List<FlightTicketWithSecondData>>()
     val flightTickets: LiveData<List<FlightTicketWithSecondData>?> get() = _flightTickets

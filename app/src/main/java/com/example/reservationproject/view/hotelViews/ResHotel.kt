@@ -88,7 +88,6 @@ class ResHotel : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
     override fun onHotelItemClick(itemId: Long) {
         findNavController().navigate(R.id.action_resHotel_to_itemFragment, Bundle().apply {
             putLong("itemId", itemId)
-            Log.e("itemid",itemId.toString())
         })
     }
 

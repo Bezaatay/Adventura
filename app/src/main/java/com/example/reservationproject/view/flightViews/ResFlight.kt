@@ -16,6 +16,7 @@ import com.example.bezalibrary.service.Functions
 import com.example.reservationproject.adapter.FlightItemAdapter
 import com.example.reservationproject.databinding.FragmentResFlightBinding
 import com.example.bezalibrary.service.model.FlightElement
+import com.example.reservationproject.R
 import com.example.reservationproject.adapter.FlightSearchBarAdapter
 import com.example.reservationproject.utils.DatePicker
 import com.example.reservationproject.viewmodel.ResFlightViewModel
@@ -125,7 +126,11 @@ class ResFlight : Fragment(), FlightItemAdapter.OnFlightItemClickListener,
     }
 
     override fun onFlightItemClick(position: Int, flightId: Long) {
-        Log.e("flightId", flightId.toString())
+        findNavController().navigate(
+            R.id.action_resFlight_to_flightItemFragment,
+            Bundle().apply {
+                putLong("flightId", flightId)
+            })
     }
 
     override fun onAirlineItemClick(position: Int, airlineId: Long, airlineName: String) {

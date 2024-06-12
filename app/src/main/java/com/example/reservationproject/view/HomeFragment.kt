@@ -44,11 +44,6 @@ class HomeFragment : Fragment(), HotelItemAdapter.OnHotelItemClickListener,
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val functions = Functions()
 
-        hotelItem = ArrayList()
-        tourItem = ArrayList()
-        flightItem = ArrayList()
-
-
         binding.popHotelRV.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 

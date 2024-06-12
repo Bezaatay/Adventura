@@ -18,7 +18,7 @@
     <item
         android:id="@+id/navigation_blog"
         android:icon="@drawable/blogging"
-        android:title="Blog" />
+        android:title="Rehber" />
 
     <item
         android:id="@+id/navigation_profile"
