@@ -3,30 +3,35 @@ package com.example.reservationproject.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.bezalibrary.service.Functions
-import com.example.reservationproject.manager.AppPref
+import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
     private val functions = Functions()
 
     private var _passwordVisible = MutableLiveData<Boolean>()
-    var passwordVisible: LiveData<Boolean> = _passwordVisible
+    val passwordVisible: LiveData<Boolean> = _passwordVisible
 
     private var _isSuccessLogin = MutableLiveData<Boolean>()
-    var isSuccessLogin: LiveData<Boolean> = _isSuccessLogin
+    val isSuccessLogin: LiveData<Boolean> = _isSuccessLogin
 
     private var _token = MutableLiveData<String>()
-    var token: LiveData<String> = _token
+    val token: LiveData<String> = _token
 
     init {
         _passwordVisible.value = false
-
     }
 
-    fun loginSuccess(username: String, password: String){
-        functions.login(username,password).observeForever{
-            _isSuccessLogin.value = true
-            _token.value = it
+    fun loginSuccess(username: String, password: String) {
+        viewModelScope.launch {
+            try {
+                val tokenResult = functions.login(username, password)
+                _token.postValue(tokenResult)
+                _isSuccessLogin.postValue(true)
+            } catch (e: Exception) {
+                _isSuccessLogin.postValue(false)
+            }
         }
     }
 

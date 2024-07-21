@@ -31,6 +31,8 @@ import com.example.bezalibrary.service.model.TourTicketWithFullData
 import com.example.bezalibrary.service.model.TourTypeElement
 import com.example.bezalibrary.service.model.UserLogin
 import com.example.bezalibrary.service.model.UserLoginResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -113,50 +115,42 @@ class Functions {
         return liveData
     }
 
-    fun login(username: String, password: String): MutableLiveData<String> {
-        val user = UserLogin(username, password)
-        val liveData = MutableLiveData<String>()
-
-        loginService.auth(user).enqueue(object : Callback<UserLoginResponse> {
-            override fun onResponse(
-                call: Call<UserLoginResponse>,
-                response: Response<UserLoginResponse>
-            ) {
+    suspend fun login(username: String, password: String): String {
+        return withContext(Dispatchers.IO) {
+            val user = UserLogin(username, password)
+            val response: Response<UserLoginResponse> = loginService.auth(user)
+            if (response.isSuccessful) {
                 val data = response.body()
                 if (data != null) {
-                    token = data.token
-                    liveData.value = token
-                }
-                RetrofitClient.setAuthToken(token!!)
-            }
-
-            override fun onFailure(call: Call<UserLoginResponse>, t: Throwable) {
-                errorMessageLiveData.postValue(t.message.toString())
-            }
-        })
-        return liveData
-    }
-
-    fun createUser(newUser: NewUser) {
-        loginService.createUser(newUser).enqueue(object : Callback<RegisterResponse> {
-            override fun onResponse(
-                call: Call<RegisterResponse>,
-                response: Response<RegisterResponse>
-            ) {
-                val data = response.body()
-                if (data?.message != null) {
-                    if (data.message == "Kullanıcı Oluşturuldu") {
-                    }
+                    val token = data.token
+                    RetrofitClient.setAuthToken(token)
+                    return@withContext token
                 } else {
-                    Log.e("HATA", "Kullanıcı Oluşturulamadı")
+                    throw Exception("Response body is null")
                 }
+            } else {
+                throw Exception("Login failed")
             }
-
-            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                errorMessageLiveData.postValue(t.message.toString())
-            }
-        })
+        }
     }
+
+    suspend fun createUser(newUser: NewUser): String {
+        return withContext(Dispatchers.IO) {
+            val response = loginService.createUser(newUser)
+            if (response.isSuccessful) {
+                val data = response.body()
+                if (data?.message == "Kullanıcı Oluşturuldu") {
+                    "Kullanıcı Oluşturuldu"
+                } else {
+                    throw Exception("Kullanıcı Oluşturulamadı")
+                }
+            } else {
+                throw Exception("Kullanıcı Oluşturulamadı")
+            }
+        }
+    }
+
+
 
     fun getBlogPost(): LiveData<List<BlogElement>> {
         val liveData = MutableLiveData<List<BlogElement>>()
