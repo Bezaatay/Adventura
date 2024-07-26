@@ -19,6 +19,10 @@ Adventura is a mobile application designed to make life easier for travel enthus
 |------------|-------------|
 | **Retrofit** | Used for handling RESTful API requests. |
 | **MVVM Architecture** | Adopted to ensure a clear separation of concerns and facilitate maintainability and scalability. |
+| **Glide** | Load and cache images by URL. |
+| **Coroutines** | Asynchronous programming. |
+| **LiveData** | Build data objects that notify views when the underlying database changes. |
+| **View Binding** | Declaratively bind observable data to UI elements. |
 
 
 ## Authentication
