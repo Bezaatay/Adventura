@@ -47,7 +47,7 @@ Adventura is a mobile application designed to make life easier for travel enthus
 
   <img width="200" alt="See all flights page" src="https://github.com/Bezaatay/Adventura/assets/133115182/fd52827e-e79a-4732-bec5-eaa42f3c71ec">
   <img width="200" alt="Flight item page" src="https://github.com/Bezaatay/Adventura/assets/133115182/a5d662c7-7e54-4d9c-9ab7-f6b85864c6a2">
-  <img width="200" alt="Flight reservastion page" src="https://github.com/Bezaatay/Adventura/assets/133115182/86551003-1075-4005-b392-8a289a8b2efb">
+  <img width="200" alt="Flight reservation page" src="https://github.com/Bezaatay/Adventura/assets/133115182/86551003-1075-4005-b392-8a289a8b2efb">
   <img width="200" alt="After res" src="https://github.com/Bezaatay/Adventura/assets/133115182/c999cedb-4a00-45dd-9f42-c6d0697511e9">
 </div>
 
@@ -64,7 +64,7 @@ Adventura is a mobile application designed to make life easier for travel enthus
 
 <div style="display: flex; flex-wrap: wrap;">
 
-  <img width="200" alt="See all tourss page" src="https://github.com/Bezaatay/Adventura/assets/133115182/37f60ee7-c80a-4df1-a16b-9707912b3c30">
+  <img width="200" alt="See all tours page" src="https://github.com/Bezaatay/Adventura/assets/133115182/37f60ee7-c80a-4df1-a16b-9707912b3c30">
   <img width="200" alt="Tours item page" src="https://github.com/Bezaatay/Adventura/assets/133115182/871bdbd7-7f66-47e3-bccf-ed7147a5a2cc">
   <img width="200" alt="After res" src="https://github.com/Bezaatay/Adventura/assets/133115182/e91333a5-02d5-4b02-9292-f1ec54d0611b">
 </div>
